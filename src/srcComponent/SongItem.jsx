@@ -9,10 +9,11 @@ import {
 } from 'react-native'
 
 // Import custom components
-// import GSoundNotConnect from "../../assets/SVGComponent/GSoundNotConnect";
 import Arrow from "../../assets/SVGComponent/Arrow";
 
 const FONT_COLOR = 'black'
+const IMAGE_SIZE = 72
+const SPACE_BETWEEN_COMPONENTS = 8
 
 // Create a component
 class SongItem extends React.Component {
@@ -25,37 +26,31 @@ class SongItem extends React.Component {
         style={styles.button}
       // onPress={() => this.props.onPress(this.props.song)}
       >
-        <View style={{ flexDirection: 'row' }}>
-          {/* <View style={[styles.image, styles.center]}> */}
+        <View style={styles.song}>
+          {/* song image */}
           <Image
             style={styles.image}
             source={{ uri: this.props.song.ImageSongUri }}
           />
-          {/* <GSoundNotConnect /> */}
-          {/* </View> */}
 
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-            {/* song infomation */}
-            <View style={styles.songInfo}>
-              <Text
-                style={styles.songName}
-                numberOfLines={1}>
-                {this.props.song.SongName}
-              </Text>
+          {/* song infomation */}
+          <View style={styles.info}>
+            <Text
+              style={styles.name}
+              numberOfLines={1}>
+              {this.props.song.SongName}
+            </Text>
 
-              <Text
-                style={styles.artist}
-                numberOfLines={1}>
-                {this.props.song.Artist}
-              </Text>
-            </View>
+            <Text
+              style={styles.artist}
+              numberOfLines={1}>
+              {this.props.song.Artist}
+            </Text>
+          </View>
 
-            {/* play this song */}
-            <View style={styles.center}>
-              <View style={[styles.nextIcon, styles.center]}>
-                <Arrow />
-              </View>
-            </View>
+          {/* play this song */}
+          <View style={styles.center}>
+            <Arrow />
           </View>
         </View>
       </TouchableHighlight>
@@ -66,26 +61,28 @@ class SongItem extends React.Component {
 // Define styles
 const styles = StyleSheet.create({
   button: {
-    marginHorizontal: 5,
     marginBottom: 10,
     borderColor: 'gray',
     borderWidth: 2,
+    borderRadius: 7,
+  },
+  song: {
+    flexDirection: 'row',
+    padding: SPACE_BETWEEN_COMPONENTS,
   },
   image: {
-    height: 96,
-    width: 96,
+    height: IMAGE_SIZE,
+    width: IMAGE_SIZE,
+    borderRadius: IMAGE_SIZE / 2,
+    borderColor: 'white',
+    borderWidth: 3,
   },
-  nextIcon: {
+  info: {
     flex: 1,
-    height: 32,
-    width: 32,
-  },
-  songInfo: {
-    flex: 7,
     justifyContent: 'center',
-    marginLeft: 8,
+    marginHorizontal: SPACE_BETWEEN_COMPONENTS,
   },
-  songName: {
+  name: {
     fontSize: 20,
     marginBottom: 5,
     color: FONT_COLOR,
@@ -93,7 +90,6 @@ const styles = StyleSheet.create({
   artist: {
     fontSize: 13,
     color: FONT_COLOR,
-
   },
   center: {
     justifyContent: 'center',

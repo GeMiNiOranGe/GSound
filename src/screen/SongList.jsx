@@ -36,6 +36,7 @@ class SongList extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
+          style={styles.flatList}
           data={this.state.songs}
           renderItem={({ item }) => <SongItem
             song={item}
@@ -55,6 +56,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'lightgray',
+  },
+  flatList: {
+    marginTop: 10,
+    marginHorizontal: 5,
   },
 })
 
