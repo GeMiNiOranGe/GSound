@@ -7,18 +7,14 @@ import {
   Text,
 } from 'react-native'
 
-// Import custom components
-import SongList from "./screen/SongList";
-import SongPlayer from "./screen/SongPlayer";
-
 // Create a component
-class App extends React.Component {
+class SongPlayer extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        
-        
-        
+
+
+
       </SafeAreaView>
     )
   }
@@ -26,8 +22,10 @@ class App extends React.Component {
 
 // Define styles
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+  },
 })
 
 // Make this component available to the app
-export default App
+export default SongPlayer

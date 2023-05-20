@@ -3,4 +3,5 @@ Programmed by **React Native CLI** but I only have an **Android** device
 
 You're a developer and you want to run this project you have to install the library following this guide
 
-* For multiple screens: [React Navigation for CLI](https://reactnavigation.org/docs/getting-started/)
+* Multiple screens: [React Navigation for CLI](https://reactnavigation.org/docs/getting-started/)
+* Import SVG to project: [react-native-svg](https://github.com/software-mansion/react-native-svg)

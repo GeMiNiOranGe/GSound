@@ -8,8 +8,9 @@ import {
   FlatList,
 } from 'react-native'
 
-import * as Api from "../srcCallApi/Api";
+// Import custom components
 import SongItem from '../srcComponent/SongItem';
+import * as Api from "../srcCallApi/Api";
 
 // Create a component
 class SongList extends React.Component {

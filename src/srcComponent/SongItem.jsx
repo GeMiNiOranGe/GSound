@@ -8,31 +8,24 @@ import {
   Image,
 } from 'react-native'
 
-import GSoundNotConnect from "../assets/SVGComponent/GSoundNotConnect";
-import Arrow from "../assets/SVGComponent/Arrow";
+// Import custom components
+// import GSoundNotConnect from "../../assets/SVGComponent/GSoundNotConnect";
+import Arrow from "../../assets/SVGComponent/Arrow";
 
 const FONT_COLOR = 'black'
+
 // Create a component
 class SongItem extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
-    // const imageUri = this.props.song.ImageSongUri !== undefined ?
-    //   { uri: this.props.song.ImageSongUri } :
-    //   require('../assets/GSound_NotConnect.svg')
-    let imageUri
-    // let imageUriTemp = this.props.song.ImageSongUri
-    if (this.props.song.ImageSongUri !== null && this.props.song.ImageSongUri !== undefined && this.props.song.ImageSongUri !== '')
-      imageUri = { uri: this.props.song.ImageSongUri }
-    else
-      imageUri = require('../assets/GSound_NotConnect.svg')
     return (
       <TouchableHighlight
         style={styles.button}
       // onPress={() => this.props.onPress(this.props.song)}
       >
-        <View style={{ flexDirection: 'row'/* , backgroundColor: 'red' */ }}>
+        <View style={{ flexDirection: 'row' }}>
           {/* <View style={[styles.image, styles.center]}> */}
           <Image
             style={styles.image}
@@ -81,7 +74,6 @@ const styles = StyleSheet.create({
   image: {
     height: 96,
     width: 96,
-    // backgroundColor: 'pink',
   },
   nextIcon: {
     flex: 1,
