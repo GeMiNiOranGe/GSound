@@ -6,3 +6,10 @@ export async function callSongList() {
 	const json = await response.json()
 	return json
 }
+
+export async function callSongAt(id) {
+	let url = `${rootUrl}Songs/${id}`
+	const response = await fetch(url)
+	const json = await response.json()
+	return json
+}

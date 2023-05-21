@@ -10,7 +10,9 @@ import {
 
 // Import custom components
 import SongItem from '../srcComponent/SongItem';
-import * as Api from "../srcCallApi/Api";
+
+// Import custom libraries
+import { callSongList } from "../srcCallApi/Api";
 
 // Create a component
 class SongList extends React.Component {
@@ -19,18 +21,18 @@ class SongList extends React.Component {
     this.state = {
       songs: [],
     }
-    // this.moveToSongDetail = this.moveToSongDetail.bind(this)
+    this.moveToSongDetail = this.moveToSongDetail.bind(this)
   }
 
   componentDidMount() {
-    Api.callSongList().then(data => this.setState({ songs: data }))
+    callSongList().then(data => this.setState({ songs: data }))
   }
 
-  // moveToSongDetail(data) {
-  //   this.props.navigation.navigate('MovieDetail', {
-  //     imdbID: data.imdbID,
-  //   })
-  // }
+  moveToSongDetail(data) {
+    this.props.navigation.navigate('SongPlayer', {
+      Id: data.Id,
+    })
+  }
 
   render() {
     return (
@@ -40,12 +42,10 @@ class SongList extends React.Component {
           data={this.state.songs}
           renderItem={({ item }) => <SongItem
             song={item}
-          // onPress={this.moveToSongDetail}
+            onPress={this.moveToSongDetail}
           />}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.Id}
         />
-
-
       </SafeAreaView>
     )
   }
@@ -55,11 +55,10 @@ class SongList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#E5E5F3',
   },
   flatList: {
     marginTop: 10,
-    marginHorizontal: 5,
   },
 })
 
