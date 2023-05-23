@@ -13,20 +13,21 @@ import SongItem from '../srcComponent/SongItem';
 
 // Import custom libraries
 import { callSongList } from "../srcCallApi/Api";
+import { songURI } from '../SongURI';
 
 // Create a component
 class SongList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      songs: [],
-    }
+    // this.state = {
+    //   songs: [],
+    // }
     // this.moveToSongDetail = this.moveToSongDetail.bind(this)
   }
 
-  componentDidMount() {
-    callSongList().then(data => this.setState({ songs: data }))
-  }
+  // componentDidMount() {
+  //   callSongList().then(data => this.setState({ songs: data }))
+  // }
 
   // moveToSongDetail(data) {
   //   this.props.navigation.navigate('SongPlayer', {
@@ -39,7 +40,7 @@ class SongList extends React.Component {
       <SafeAreaView style={styles.container}>
         <FlatList
           style={styles.flatList}
-          data={this.state.songs}
+          data={songURI}
           renderItem={({ item, index }) => <SongItem
             item={item}
             index={index}
