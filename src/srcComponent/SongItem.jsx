@@ -7,55 +7,57 @@ import {
   Text,
   Image,
 } from 'react-native'
+import { useNavigation } from "@react-navigation/native";
 
 // Import custom components
-import Play from "../../assets/SVGComponent/Play";
+import PlaySmall from "../../assets/SVGComponent/Play24";
 
 const IMAGE_SIZE = 64
 const SPACE_BETWEEN_COMPONENTS = 8
 
 // Create a component
-class SongItem extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    return (
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => this.props.onPress(this.props.song)}
-        underlayColor={'pink'}
-      >
-        <View style={styles.song}>
-          {/* song image */}
-          <Image
-            style={styles.image}
-            source={{ uri: this.props.song.ImageSongUri }}
-          />
+function SongItem({ item, index, data }) {
+  const navigation = useNavigation()
+  return (
+    <TouchableHighlight
+      style={styles.button}
+      onPress={() =>
+        navigation.navigate('SongPlayer', {
+          data: item,
+          index: index,
+        })
+      }
+      underlayColor={'pink'}
+    >
+      <View style={styles.song}>
+        {/* song image */}
+        <Image
+          style={styles.image}
+          source={{ uri: item.ImageSongUri }}
+        />
 
-          {/* song infomation */}
-          <View style={styles.info}>
-            <Text
-              style={styles.songName}
-              numberOfLines={1}>
-              {this.props.song.SongName}
-            </Text>
+        {/* song infomation */}
+        <View style={styles.info}>
+          <Text
+            style={styles.songName}
+            numberOfLines={1}>
+            {item.SongName}
+          </Text>
 
-            <Text
-              style={styles.artist}
-              numberOfLines={1}>
-              {this.props.song.Artist}
-            </Text>
-          </View>
-
-          {/* play this song */}
-          <View style={styles.platIcon}>
-            <Play />
-          </View>
+          <Text
+            style={styles.artist}
+            numberOfLines={1}>
+            {item.Artist}
+          </Text>
         </View>
-      </TouchableHighlight>
-    )
-  }
+
+        {/* play this song */}
+        <View style={styles.platIcon}>
+          <PlaySmall />
+        </View>
+      </View>
+    </TouchableHighlight>
+  )
 }
 
 // Define styles

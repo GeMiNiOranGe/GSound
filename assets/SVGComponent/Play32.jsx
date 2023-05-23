@@ -3,11 +3,12 @@ import Svg, { Path } from "react-native-svg"
 const Play = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
+    width={48}
+    height={48}
     fill="none"
     strokeWidth={1.5}
     color="#000"
+    viewBox="0 0 24 24"
     {...props}
   >
     <Path

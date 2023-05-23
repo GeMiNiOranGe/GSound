@@ -21,18 +21,18 @@ class SongList extends React.Component {
     this.state = {
       songs: [],
     }
-    this.moveToSongDetail = this.moveToSongDetail.bind(this)
+    // this.moveToSongDetail = this.moveToSongDetail.bind(this)
   }
 
   componentDidMount() {
     callSongList().then(data => this.setState({ songs: data }))
   }
 
-  moveToSongDetail(data) {
-    this.props.navigation.navigate('SongPlayer', {
-      Id: data.Id,
-    })
-  }
+  // moveToSongDetail(data) {
+  //   this.props.navigation.navigate('SongPlayer', {
+  //     Id: data.Id,
+  //   })
+  // }
 
   render() {
     return (
@@ -40,9 +40,11 @@ class SongList extends React.Component {
         <FlatList
           style={styles.flatList}
           data={this.state.songs}
-          renderItem={({ item }) => <SongItem
-            song={item}
-            onPress={this.moveToSongDetail}
+          renderItem={({ item, index }) => <SongItem
+            item={item}
+            index={index}
+            // data={this.state.songs}
+          // onPress={this.moveToSongDetail}
           />}
           keyExtractor={item => item.Id}
         />
