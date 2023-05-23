@@ -20,6 +20,7 @@ import SkipPrev from "../../assets/SVGComponent/SkipPrev32";
 import SkipNext from "../../assets/SVGComponent/SkipNext32";
 import Repeat32 from '../../assets/SVGComponent/Repeat32';
 import Shuffle32 from '../../assets/SVGComponent/Shuffle32';
+import { songURI} from '../SongData/SongURI';
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75
@@ -41,15 +42,13 @@ class SongPlayer extends React.Component {
   }
 
   componentDidMount() {
-    callSongList().then(data => {
-      this.setState({ songs: data })
-      setTimeout(() => {
-        this.reactRef.current.scrollToIndex({
-          animated: true,
-          index: this.state.currentSong,
-        })
-      }, 100)// minimum 13
-    })
+    // this.setState({ songs: songsData })
+    setTimeout(() => {
+      this.reactRef.current.scrollToIndex({
+        animated: true,
+        index: this.state.currentSong,
+      })
+    }, 500)// minimum 13
     this.setupPlayer()
   }
 
@@ -69,7 +68,7 @@ class SongPlayer extends React.Component {
         // Capabilities that will show up when the notification is in the compact form on Android
         compactCapabilities: [Capability.Play, Capability.Pause],
       });
-      await TrackPlayer.add(this.state.songs)
+      await TrackPlayer.add(songURI)
     }
     catch (e) { }
   }

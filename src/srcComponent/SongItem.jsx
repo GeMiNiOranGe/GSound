@@ -16,13 +16,13 @@ const IMAGE_SIZE = 64
 const SPACE_BETWEEN_COMPONENTS = 8
 
 // Create a component
-function SongItem({ item, index, data }) {
+function SongItem({ item, index }) {
   const navigation = useNavigation()
   return (
     <TouchableHighlight
       style={styles.button}
       onPress={() =>
-        navigation.navigate('SongPlayer', {
+        navigation.navigate('Music', {
           data: item,
           index: index,
         })
@@ -33,7 +33,7 @@ function SongItem({ item, index, data }) {
         {/* song image */}
         <Image
           style={styles.image}
-          source={{ uri: item.ImageSongUri }}
+          source={item.ImageSongUri}
         />
 
         {/* song infomation */}
