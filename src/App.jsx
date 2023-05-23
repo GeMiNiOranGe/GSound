@@ -3,51 +3,39 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Import custom components
 import SongList from "./screen/SongList";
 import SongPlayer from "./screen/SongPlayer";
-import SongPlayList from './screen/SongPlayList';
-import MusicDoubleNote from "../assets/SVGComponent/MusicDoubleNote";
-import Headset from "../assets/SVGComponent/Headset";
-import AlbumList from "../assets/SVGComponent/AlbumList";
+import LikedSongList from './screen/LikedSongList';
 
-const Tab = createBottomTabNavigator()
+const Screen = createNativeStackNavigator()
 
 // Create a component
 class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
+        <Screen.Navigator>
+          <Screen.Screen
             name='SongList'
             component={SongList}
-            options={{
-              title: 'List',
-              tabBarIcon: () => <AlbumList />,
-            }}
+            options={{ title: 'List', }}
           />
 
-          <Tab.Screen
+          <Screen.Screen
             name='SongPlayer'
             component={SongPlayer}
-            options={{ 
-              title: 'Player',
-              tabBarIcon: () => <Headset />,
-            }}
+            options={{ title: 'Player', }}
           />
 
-          <Tab.Screen
-            name='SongPlayList'
-            component={SongPlayList}
-            options={{
-               title: 'Playlist',
-               tabBarIcon: () => <MusicDoubleNote />,
-              }}
+          <Screen.Screen
+            name='LikedSongList'
+            component={LikedSongList}
+            options={{ title: 'Liked song', }}
           />
-        </Tab.Navigator>
+        </Screen.Navigator>
       </NavigationContainer>
     )
   }
