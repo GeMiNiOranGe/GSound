@@ -1,37 +1,37 @@
 export const songURI = [
 	{
-		SongName: "Dum Dum",
-		Artist: "Raven & Kreyn, KDH, Scarlett",
-		SongUri: require('./Songs/dum-dum.mp3'),
-		ImageSongUri: require('./Images/dum-dum.jpg'),
-		// Id: "1"
+		id: "1",
+		url: require('./Songs/dum-dum.mp3'),
+		title: "Dum Dum",
+		artist: "Raven & Kreyn, KDH, Scarlett",
+		imageSongUri: require('./Images/dum-dum.jpg'),
 	},
 	{
-		SongName: "LA VIBE",
-		Artist: "JOXION",
-		SongUri: require('./Songs/la-vibe.mp3'),
-		ImageSongUri: require('./Images/la-vibe.jpg'),
-		// Id: "2"
+		id: "2",
+		url: require('./Songs/la-vibe.mp3'),
+		title: "LA VIBE",
+		artist: "JOXION",
+		imageSongUri: require('./Images/la-vibe.jpg'),
 	},
 	{
-		SongName: "La Manera De Vivir",
-		Artist: "NOYSE, ÆSTRØ",
-		SongUri: require('./Songs/la-manera-de-vivir.mp3'),
-		ImageSongUri: require('./Images/la-manera-de-vivir.jpg'),
-		// Id: "3"
+		id: "3",
+		url: require('./Songs/la-manera-de-vivir.mp3'),
+		title: "La Manera De Vivir",
+		artist: "NOYSE, ÆSTRØ",
+		imageSongUri: require('./Images/la-manera-de-vivir.jpg'),
 	},
 	{
-		SongName: "What You Gonna Do",
-		Artist: "MADZI",
-		SongUri: require('./Songs/what-you-gonna-do.mp3'),
-		ImageSongUri: require('./Images/what-you-gonna-do.jpg'),
-		// Id: "4"
+		id: "4",
+		url: require('./Songs/what-you-gonna-do.mp3'),
+		title: "What You Gonna Do",
+		artist: "MADZI",
+		imageSongUri: require('./Images/what-you-gonna-do.jpg'),
 	},
 	{
-		SongName: "Sympathy (feat. Coral Oulu)",
-		Artist: "Coral Oulu",
-		SongUri: require('./Songs/sympathy-feat-coral-oulu.mp3'),
-		ImageSongUri: require('./Images/sympathy-feat-coral-oulu.jpg'),
-		// Id: "5"
+		id: "5",
+		url: require('./Songs/sympathy-feat-coral-oulu.mp3'),
+		title: "Sympathy (feat. Coral Oulu)",
+		artist: "Coral Oulu",
+		imageSongUri: require('./Images/sympathy-feat-coral-oulu.jpg'),
 	}
 ]

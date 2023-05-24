@@ -33,7 +33,7 @@ function SongItem({ item, index }) {
         {/* song image */}
         <Image
           style={styles.image}
-          source={item.ImageSongUri}
+          source={item.imageSongUri}
         />
 
         {/* song infomation */}
@@ -41,13 +41,13 @@ function SongItem({ item, index }) {
           <Text
             style={styles.songName}
             numberOfLines={1}>
-            {item.SongName}
+            {item.title}
           </Text>
 
           <Text
             style={styles.artist}
             numberOfLines={1}>
-            {item.Artist}
+            {item.artist}
           </Text>
         </View>
 

@@ -15,7 +15,7 @@ import TrackPlayer, { Capability } from 'react-native-track-player';
 
 // Import custom libraries
 import { callSongAt, callSongList } from '../srcCallApi/Api';
-import Play from "../../assets/SVGComponent/Play32";
+import Play from "../../assets/SVGComponent/Play48";
 import SkipPrev from "../../assets/SVGComponent/SkipPrev32";
 import SkipNext from "../../assets/SVGComponent/SkipNext32";
 import Repeat32 from '../../assets/SVGComponent/Repeat32';
