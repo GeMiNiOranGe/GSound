@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import PlayerStackScreen from './tabs/playerStack/PlayerStackScreen'
 
 // Import icons
-import Headset from '../assets/SVGComponent/Headset'
+import AlbumList from '../assets/SVGComponent/AlbumList'
 import User from '../assets/SVGComponent/User'
 
 const Tab = createBottomTabNavigator()
@@ -23,8 +23,8 @@ class AppTab extends React.Component {
             name='PlayerStackScreen'
             component={PlayerStackScreen}
             options={{
-              title: 'Player',
-              tabBarIcon: () => <Headset />,
+              title:'List',
+              tabBarIcon: () => <AlbumList />,
             }}
           />
 
@@ -32,7 +32,6 @@ class AppTab extends React.Component {
             name='Player'
             component={PlayerStackScreen}
             options={{
-              title: 'Player',
               tabBarIcon: () => <User />,
             }}
           /> */}
