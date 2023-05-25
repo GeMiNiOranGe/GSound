@@ -7,5 +7,6 @@ You're a developer and you want to run this project you have to install the libr
 * How to import SVG: [react-native-svg](https://github.com/software-mansion/react-native-svg)
 * Slider: [@react-native-community/slider](https://github.com/callstack/react-native-slider)
 * Music player: [react-native-track-player](https://react-native-track-player.js.org/docs/basics/installation)
+* Local stogare: [@react-native-async-storage/async-storage](https://react-native-async-storage.github.io/async-storage/docs/install/)
 
 Other resources: [Icon](https://iconoir.com/)

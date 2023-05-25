@@ -7,57 +7,54 @@ import {
   Text,
   Image,
 } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
 
 // Import custom components
-import PlaySmall from "../../assets/SVGComponent/Play24";
+import Play24 from "../../assets/SVGComponent/Play24";
 
 const IMAGE_SIZE = 64
 const SPACE_BETWEEN_COMPONENTS = 8
 
 // Create a component
-function SongItem({ item, index }) {
-  const navigation = useNavigation()
-  return (
-    <TouchableHighlight
-      style={styles.button}
-      onPress={() =>
-        navigation.navigate('Music', {
-          data: item,
-          index: index,
-        })
-      }
-      underlayColor={'pink'}
-    >
-      <View style={styles.song}>
-        {/* song image */}
-        <Image
-          style={styles.image}
-          source={item.imageSongUri}
-        />
+class SongItem/* ({ song, index, onPress }) */ extends React.Component {
+  render() {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          this.props.onPress(this.props.index)
+        }}
+        underlayColor={'pink'}
+      >
+        <View style={styles.songView}>
+          {/* song image */}
+          <Image
+            style={styles.image}
+            source={{ uri: this.props.song.imageSongUri }}
+          />
 
-        {/* song infomation */}
-        <View style={styles.info}>
-          <Text
-            style={styles.songName}
-            numberOfLines={1}>
-            {item.title}
-          </Text>
+          {/* song infomation */}
+          <View style={styles.info}>
+            <Text
+              style={styles.songName}
+              numberOfLines={1}>
+              {this.props.song.title}
+            </Text>
 
-          <Text
-            style={styles.artist}
-            numberOfLines={1}>
-            {item.artist}
-          </Text>
+            <Text
+              style={styles.artist}
+              numberOfLines={1}>
+              {this.props.song.artist}
+            </Text>
+          </View>
+
+          {/* play this song */}
+          <View style={styles.playIcon}>
+            <Play24 />
+          </View>
         </View>
-
-        {/* play this song */}
-        <View style={styles.platIcon}>
-          <PlaySmall />
-        </View>
-      </View>
-    </TouchableHighlight>
-  )
+      </TouchableHighlight>
+    )
+  }
 }
 
 // Define styles
@@ -69,7 +66,7 @@ const styles = StyleSheet.create({
     elevation: 7,
     backgroundColor: 'white',
   },
-  song: {
+  songView: {
     flexDirection: 'row',
     padding: SPACE_BETWEEN_COMPONENTS,
   },
@@ -93,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'gray',
   },
-  platIcon: {
+  playIcon: {
     marginHorizontal: SPACE_BETWEEN_COMPONENTS,
     justifyContent: 'center',
     alignItems: 'center',

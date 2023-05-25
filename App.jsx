@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import AppNavigator from './src/AppNavigator';
+import AppTab from './src/AppTab'
 
 function App() {
   return (
-    <AppNavigator />
+    <AppTab />
   )
 }
 
