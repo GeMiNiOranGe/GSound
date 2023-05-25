@@ -19,15 +19,15 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 // Import custom libraries
-import { callSongAt, callSongList } from '../srcCallApi/Api';
-import Play48 from "../../assets/SVGComponent/Play48";
-import Pause48 from "../../assets/SVGComponent/Pause48";
-import SkipPrev from "../../assets/SVGComponent/SkipPrev32";
-import SkipNext from "../../assets/SVGComponent/SkipNext32";
-import Repeat32 from '../../assets/SVGComponent/Repeat32';
-import Shuffle32 from '../../assets/SVGComponent/Shuffle32';
+import { callSongAt, callSongList } from '../../../srcCallApi/Api';
+import Play48 from "../../../../assets/SVGComponent/Play48";
+import Pause48 from "../../../../assets/SVGComponent/Pause48";
+import SkipPrev from "../../../../assets/SVGComponent/SkipPrev32";
+import SkipNext from "../../../../assets/SVGComponent/SkipNext32";
+import Repeat32 from '../../../../assets/SVGComponent/Repeat32';
+import Shuffle32 from '../../../../assets/SVGComponent/Shuffle32';
 import { useRoute } from '@react-navigation/native';
-import { songURI } from '../SongURI';
+import { songURI } from '../../../SongURI';
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75
@@ -37,7 +37,7 @@ const NOW_PLAYING_BASE_IMAGE = Dimensions.get('window').width * 0.825
 function Music() {
   const route = useRoute()
   const reactRef = React.useRef()
-  const data = route.params.data
+  // const data = route.params.data
   const [currentSong, setCurrentSong] = React.useState(route.params.index);
   const playbackState = usePlaybackState()
   const progress = useProgress()
