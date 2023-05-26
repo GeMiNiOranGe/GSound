@@ -20,14 +20,14 @@ class AppTab extends React.Component {
     return (
       <NavigationContainer>
         <Tab.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Tab.Screen
+          <Tab.Screen
             name='PlayerStackScreen'
             component={PlayerStackScreen}
             options={{
               title: 'List',
               tabBarIcon: () => <AlbumList />,
             }}
-          /> */}
+          />
 
           <Tab.Screen
             name='ArtistStackScreen'
