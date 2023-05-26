@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native'
 
 // Import custom components
 import PlayerStackScreen from './tabs/playerStack/PlayerStackScreen'
+import ArtistStackScreen from './tabs/artistStack/ArtistStackScreen'
 
 // Import icons
 import AlbumList from '../assets/SVGComponent/AlbumList'
@@ -19,22 +20,23 @@ class AppTab extends React.Component {
     return (
       <NavigationContainer>
         <Tab.Navigator screenOptions={{ headerShown: false }}>
-          <Tab.Screen
+          {/* <Tab.Screen
             name='PlayerStackScreen'
             component={PlayerStackScreen}
             options={{
-              title:'List',
+              title: 'List',
               tabBarIcon: () => <AlbumList />,
             }}
-          />
+          /> */}
 
-          {/* <Tab.Screen
-            name='Player'
-            component={PlayerStackScreen}
+          <Tab.Screen
+            name='ArtistStackScreen'
+            component={ArtistStackScreen}
             options={{
+              title: 'Artist',
               tabBarIcon: () => <User />,
             }}
-          /> */}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     )
