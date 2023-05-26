@@ -12,39 +12,20 @@ You're a developer and you want to run this project you have to install the libr
 Other resources: [Icon](https://iconoir.com/)
 
 # Detailed instructions
-* Step 1: open your code editor
+* Step 1: open your code editor at the folder you want to save
 * Step 2: clone this project
-```bash
-git clone https://github.com/GeMiNiOranGe/GSound.git
-```
-* Step 3: intall library
+	```bash
+	git clone https://github.com/GeMiNiOranGe/GSound.git
+	```
+* Step 3: move to GSound folder
+	```cmd
+	cd .\GSound\
+	```
+* Step 4: intall library
+	```cmd
+	npm install
+	```
 
-Copy below and paste in command prompt
-
-React Navigation: native/native-stack/bottom-tabs
-```cmd
-npm install @react-navigation/native & npm install react-native-screens react-native-safe-area-context & npm install @react-navigation/bottom-tabs
-```
-
-SVG image
-```cmd
-npm install react-native-svg
-```
-
-Slider
-```cmd
-npm install @react-native-community/slider --save
-```
-
-Gradient
-```cmd
-npm install react-native-linear-gradient --save
-```
-
-Track player
-```cmd
-npm install --save react-native-track-player
-```
-* Step 4: run the app on emulator or device
+* Step 5: run the app on emulator or device
 
 Yayyyyyyyyy, it's finally done and enjoy this app, have fun =))))
