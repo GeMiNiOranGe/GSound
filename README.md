@@ -5,10 +5,10 @@ Programmed by **React Native CLI** but I only have an **Android** device.
 
 ## Demo
 <div style="display: flex; flex-direction: row; justify-content: center;">
-	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image1.jpg" alt="image1">
-	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image2.jpg" alt="image2">
-	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image3.jpg" alt="image3">
-	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image4.jpg" alt="image4">
+	<img style="height: 400px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image1.jpg" alt="image1">
+	<img style="height: 400px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image2.jpg" alt="image2">
+	<img style="height: 400px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image3.jpg" alt="image3">
+	<img style="height: 400px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image4.jpg" alt="image4">
 </div>
 
 ## How to run
