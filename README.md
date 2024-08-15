@@ -3,6 +3,15 @@ GSound is a music player for mobile devices.
 
 Programmed by **React Native CLI** but I only have an **Android** device.
 
+## Demo
+<div style="display: flex; flex-direction: row; justify-content: center;">
+	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image1.jpg" alt="image1">
+	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image2.jpg" alt="image2">
+	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image3.jpg" alt="image3">
+	<img style="height: 450px;" src="https://github.com/GeMiNiOranGe/GSound/blob/demo/image/image4.jpg" alt="image4">
+</div>
+
+## How to run
 You're a developer and you want to run this project you have to install the library following this guide.
 
 * Multiple screens: [native/native-stack](https://reactnavigation.org/docs/getting-started/) and [bottom-tabs](https://reactnavigation.org/docs/tab-based-navigation/)
@@ -13,7 +22,6 @@ You're a developer and you want to run this project you have to install the libr
 
 Other resources: [Icon](https://iconoir.com/).
 
-# Detailed instructions
 **Note**: Make sure you are using [`microsoft-openjdk17`](https://reactnative.dev/docs/environment-setup?guide=native&platform=android&os=windows).
 * Step 1: clone this project.
 	```bash
