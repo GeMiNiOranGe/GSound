@@ -7,11 +7,11 @@ import {
   Text,
   FlatList,
 } from 'react-native'
-import { callArtistList } from '../ApiArtist'
-import ArtistItem from '../ArtistItem'
+import { callArtistList } from '../services/ArtistService'
+import ArtistItem from '../components/ArtistItem'
 
 // Create a component
-class ArtistList extends React.Component {
+class ArtistListScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,7 +25,7 @@ class ArtistList extends React.Component {
   }
 
   moveToInfoDetail(data) {
-    this.props.navigation.navigate('InfoDetail', {
+    this.props.navigation.navigate('ArtistDetailScreen', {
       id: data.id,
     })
   }
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
 })
 
 // Make this component available to the app
-export default ArtistList
+export default ArtistListScreen

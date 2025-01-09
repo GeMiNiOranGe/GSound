@@ -5,10 +5,10 @@ import {
   FlatList,
 } from 'react-native'
 
-import SongItem from '../../../srcComponent/SongItem'
-import { callSongList } from '../../../srcCallApi/Api'
+import SongItem from '../components/SongItem'
+import { callSongList } from '../services/SongService'
 
-class SongList extends React.Component {
+class SongListScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,7 +22,7 @@ class SongList extends React.Component {
   }
 
   moveToSongDetail(index) {
-    this.props.navigation.navigate('Music', {
+    this.props.navigation.navigate('PlayerScreen', {
       index: index,
     })
   }
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SongList
+export default SongListScreen

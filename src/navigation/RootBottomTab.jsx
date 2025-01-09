@@ -5,24 +5,24 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 
 // Import custom components
-import PlayerStackScreen from './tabs/playerStack/PlayerStackScreen'
-import ArtistStackScreen from './tabs/artistStack/ArtistStackScreen'
+import SongListStack from './SongListStack'
+import ArtistStack from './ArtistStack'
 
 // Import icons
-import AlbumList from '../assets/SVGComponent/AlbumList'
-import User from '../assets/SVGComponent/User'
+import AlbumList from '../assets/icons/AlbumList'
+import User from '../assets/icons/User'
 
 const Tab = createBottomTabNavigator()
 
 // Create a component
-class AppTab extends React.Component {
+class RootBottomTab extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator initialRouteName='SongListStack' screenOptions={{ headerShown: false }}>
           <Tab.Screen
-            name='PlayerStackScreen'
-            component={PlayerStackScreen}
+            name='SongListStack'
+            component={SongListStack}
             options={{
               title: 'List',
               tabBarIcon: () => <AlbumList />,
@@ -30,8 +30,8 @@ class AppTab extends React.Component {
           />
 
           <Tab.Screen
-            name='ArtistStackScreen'
-            component={ArtistStackScreen}
+            name='ArtistStack'
+            component={ArtistStack}
             options={{
               title: 'Artist',
               tabBarIcon: () => <User />,
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
 })
 
 // Make this component available to the app
-export default AppTab
+export default RootBottomTab

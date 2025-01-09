@@ -9,10 +9,10 @@ import {
 } from 'react-native'
 
 // Import custom components
-import SongItem from '../srcComponent/SongItem';
+import SongItem from '../components/SongItem';
 
 // Import custom libraries
-import { callSongList } from "../srcCallApi/Api";
+import { callSongList } from "../services/SongService";
 import { songURI } from '../SongURI';
 
 // Create a component

@@ -1,14 +1,14 @@
-let rootUrl='https://6465be999c09d77a62f2b61f.mockapi.io/GSound/v1/'
+import { MOCKAPI_URL } from "../config"
 
 export async function callArtistList() {
-	let url = `${rootUrl}Artists`
+	let url = `${MOCKAPI_URL}/Artists`
 	const response = await fetch(url)
 	const json = await response.json()
 	return json
 }
 
 export async function callArtistAt(id) {
-	let url = `${rootUrl}Artists/${id}`
+	let url = `${MOCKAPI_URL}/Artists/${id}`
 	const response = await fetch(url)
 	const json = await response.json()
 	return json

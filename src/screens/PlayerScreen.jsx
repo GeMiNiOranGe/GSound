@@ -19,27 +19,48 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 // Import custom libraries
-import { callSongList } from './srcCallApi/Api';
-import Play48 from "../assets/SVGComponent/Play48";
-import Pause48 from "../assets/SVGComponent/Pause48";
-import SkipPrev from "../assets/SVGComponent/SkipPrev32";
-import SkipNext from "../assets/SVGComponent/SkipNext32";
+import { callSongAt, callSongList } from '../services/SongService';
+import Play48 from "../assets/icons/Play48";
+import Pause48 from "../assets/icons/Pause48";
+import SkipPrev from "../assets/icons/SkipPrev32";
+import SkipNext from "../assets/icons/SkipNext32";
+import Repeat32 from '../assets/icons/Repeat32';
+import Shuffle32 from '../assets/icons/Shuffle32';
+import { useRoute } from '@react-navigation/native';
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75
 const NOW_PLAYING_BASE_IMAGE = Dimensions.get('window').width * 0.825
 
 // Create a component
-function PlayerTemp() {
+function PlayerScreen() {
+  const route = useRoute()
   const reactRef = React.useRef()
-  const [currentSong, setCurrentSong] = React.useState(0);
   const [dataSource, setDataSource] = React.useState([]);
+  const [currentSong, setCurrentSong] = React.useState(route.params.index);
   const playbackState = usePlaybackState()
   const progress = useProgress()
+
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     songs: [],
+  //     currentSong: this.props.route.params.index,
+  //   }
+
+  // const Id = this.props.route.params.Id;
+  // callSongAt(Id).then(data => this.setState(data))
+  // }
 
   React.useEffect(() => {
     callSongList().then(data => {
       setDataSource(data)
+      setTimeout(() => {
+        reactRef.current.scrollToIndex({
+          animated: true,
+          index: currentSong,
+        })
+      }, 500)// minimum 13
       async function setupPlayer() {
         try {
           await TrackPlayer.setupPlayer()
@@ -67,18 +88,7 @@ function PlayerTemp() {
       }
       setupPlayer()
     })
-    // setDataSource(data)
-    // console.log('data: ', data);
-    console.log('api: ', dataSource);
-    // }, [])
-
-    // console.log('dataSource: ', dataSource);
-
-    // React.useEffect(() => {
-    console.log('setupPlayer: ', dataSource);
-  }, [/* dataSource */])
-
-  console.log('dataSource: ', dataSource);
+  }, [])
 
   async function togglePlayback(playbackState) {
     if (
@@ -114,7 +124,7 @@ function PlayerTemp() {
               <View style={styles.baseImage}>
                 <Image
                   style={styles.imageSong}
-                  source={{ uri: item.imageSongUri }}
+                  source={{uri:item.imageSongUri}}
                 />
               </View>
             </View>
@@ -244,4 +254,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default PlayerTemp
+export default PlayerScreen

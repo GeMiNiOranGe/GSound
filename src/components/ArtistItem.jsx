@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   Image,
 } from 'react-native'
-import Arrow from '../../../assets/SVGComponent/Arrow'
+import Arrow from '../assets/icons/Arrow'
 
 const IMAGE_SIZE = 96
 const SPACE_BETWEEN_COMPONENTS = 8

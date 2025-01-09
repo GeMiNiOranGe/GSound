@@ -19,76 +19,54 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 // Import custom libraries
-import { callSongAt, callSongList } from '../../../srcCallApi/Api';
-import Play48 from "../../../../assets/SVGComponent/Play48";
-import Pause48 from "../../../../assets/SVGComponent/Pause48";
-import SkipPrev from "../../../../assets/SVGComponent/SkipPrev32";
-import SkipNext from "../../../../assets/SVGComponent/SkipNext32";
-import Repeat32 from '../../../../assets/SVGComponent/Repeat32';
-import Shuffle32 from '../../../../assets/SVGComponent/Shuffle32';
-import { useRoute } from '@react-navigation/native';
+import { callSongList } from '../services/SongService';
+import SkipPrev from '../assets/icons/SkipPrev32';
+import Play48 from '../assets/icons/Play48';
+import Pause48 from '../assets/icons/Pause48';
+import SkipNext from '../assets/icons/SkipNext32';
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75
 const NOW_PLAYING_BASE_IMAGE = Dimensions.get('window').width * 0.825
 
 // Create a component
-function Music() {
-  const route = useRoute()
+function Player() {
   const reactRef = React.useRef()
+  const [currentSong, setCurrentSong] = React.useState(0);
   const [dataSource, setDataSource] = React.useState([]);
-  const [currentSong, setCurrentSong] = React.useState(route.params.index);
   const playbackState = usePlaybackState()
   const progress = useProgress()
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     songs: [],
-  //     currentSong: this.props.route.params.index,
-  //   }
-
-  // const Id = this.props.route.params.Id;
-  // callSongAt(Id).then(data => this.setState(data))
-  // }
-
   React.useEffect(() => {
-    callSongList().then(data => {
-      setDataSource(data)
-      setTimeout(() => {
-        reactRef.current.scrollToIndex({
-          animated: true,
-          index: currentSong,
-        })
-      }, 500)// minimum 13
-      async function setupPlayer() {
-        try {
-          await TrackPlayer.setupPlayer()
-          TrackPlayer.updateOptions({
-            // Media controls capabilities
-            capabilities: [
-              Capability.Play,
-              Capability.Pause,
-              Capability.SkipToNext,
-              Capability.SkipToPrevious,
-              Capability.Stop,
-            ],
+    callSongList().then(data => setDataSource(data))
 
-            // Capabilities that will show up when the notification is in the compact form on Android
-            compactCapabilities: [
-              Capability.Play,
-              Capability.Pause
-            ],
-          });
-          await TrackPlayer.add(data)
-          await TrackPlayer.skip(currentSong)
-          togglePlayback(playbackState)
-        }
-        catch (e) { }
+    async function setupPlayer() {
+      try {
+        await TrackPlayer.setupPlayer()
+        TrackPlayer.updateOptions({
+          // Media controls capabilities
+          capabilities: [
+            Capability.Play,
+            Capability.Pause,
+            Capability.SkipToNext,
+            Capability.SkipToPrevious,
+            Capability.Stop,
+          ],
+
+          // Capabilities that will show up when the notification is in the compact form on Android
+          compactCapabilities: [
+            Capability.Play,
+            Capability.Pause
+          ],
+        });
+        await TrackPlayer.add(dataSource)
+        await TrackPlayer.skip(currentSong)
+        togglePlayback(playbackState)
       }
-      setupPlayer()
-    })
-  }, [])
+      catch (e) { }
+    }
+    setupPlayer()
+  }, [dataSource])
 
   async function togglePlayback(playbackState) {
     if (
@@ -124,7 +102,7 @@ function Music() {
               <View style={styles.baseImage}>
                 <Image
                   style={styles.imageSong}
-                  source={{uri:item.imageSongUri}}
+                  source={{ uri: item.imageSongUri }}
                 />
               </View>
             </View>
@@ -149,7 +127,7 @@ function Music() {
         />
       </View>
 
-      <View style={styles.buttonArea}>
+      <View style={[styles.buttonArea, { marginBottom: 90 }]}>
         {/* skip prev a song */}
         <TouchableOpacity
           onPress={async () => {
@@ -191,14 +169,14 @@ function Music() {
         </TouchableOpacity>
       </View>
 
-      <View style={[styles.buttonArea, { marginBottom: 90 }]}>
+      {/* <View style={[styles.buttonArea, { marginBottom: 90 }]}> */}
         {/* <TouchableOpacity>
           <Repeat32 />
         </TouchableOpacity>
         <TouchableOpacity>
           <Shuffle32 />
         </TouchableOpacity> */}
-      </View>
+      {/* </View> */}
     </SafeAreaView>
   )
 }
@@ -254,4 +232,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Music
+export default Player

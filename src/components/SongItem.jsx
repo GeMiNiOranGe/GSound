@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 // Import custom components
-import Play24 from "../../assets/SVGComponent/Play24";
+import Play24 from "../assets/icons/Play24";
 
 const IMAGE_SIZE = 64
 const SPACE_BETWEEN_COMPONENTS = 8

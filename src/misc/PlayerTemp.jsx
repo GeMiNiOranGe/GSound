@@ -19,18 +19,18 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 // Import custom libraries
-import { callSongList } from '../../../srcCallApi/Api';
-import SkipPrev from '../../../../assets/SVGComponent/SkipPrev32';
-import Play48 from '../../../../assets/SVGComponent/Play48';
-import Pause48 from '../../../../assets/SVGComponent/Pause48';
-import SkipNext from '../../../../assets/SVGComponent/SkipNext32';
+import { callSongList } from '../services/SongService';
+import Play48 from "../assets/icons/Play48";
+import Pause48 from "../assets/icons/Pause48";
+import SkipPrev from "../assets/icons/SkipPrev32";
+import SkipNext from "../assets/icons/SkipNext32";
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75
 const NOW_PLAYING_BASE_IMAGE = Dimensions.get('window').width * 0.825
 
 // Create a component
-function Player() {
+function PlayerTemp() {
   const reactRef = React.useRef()
   const [currentSong, setCurrentSong] = React.useState(0);
   const [dataSource, setDataSource] = React.useState([]);
@@ -38,35 +38,47 @@ function Player() {
   const progress = useProgress()
 
   React.useEffect(() => {
-    callSongList().then(data => setDataSource(data))
+    callSongList().then(data => {
+      setDataSource(data)
+      async function setupPlayer() {
+        try {
+          await TrackPlayer.setupPlayer()
+          TrackPlayer.updateOptions({
+            // Media controls capabilities
+            capabilities: [
+              Capability.Play,
+              Capability.Pause,
+              Capability.SkipToNext,
+              Capability.SkipToPrevious,
+              Capability.Stop,
+            ],
 
-    async function setupPlayer() {
-      try {
-        await TrackPlayer.setupPlayer()
-        TrackPlayer.updateOptions({
-          // Media controls capabilities
-          capabilities: [
-            Capability.Play,
-            Capability.Pause,
-            Capability.SkipToNext,
-            Capability.SkipToPrevious,
-            Capability.Stop,
-          ],
-
-          // Capabilities that will show up when the notification is in the compact form on Android
-          compactCapabilities: [
-            Capability.Play,
-            Capability.Pause
-          ],
-        });
-        await TrackPlayer.add(dataSource)
-        await TrackPlayer.skip(currentSong)
-        togglePlayback(playbackState)
+            // Capabilities that will show up when the notification is in the compact form on Android
+            compactCapabilities: [
+              Capability.Play,
+              Capability.Pause
+            ],
+          });
+          await TrackPlayer.add(data)
+          await TrackPlayer.skip(currentSong)
+          togglePlayback(playbackState)
+        }
+        catch (e) { }
       }
-      catch (e) { }
-    }
-    setupPlayer()
-  }, [dataSource])
+      setupPlayer()
+    })
+    // setDataSource(data)
+    // console.log('data: ', data);
+    console.log('api: ', dataSource);
+    // }, [])
+
+    // console.log('dataSource: ', dataSource);
+
+    // React.useEffect(() => {
+    console.log('setupPlayer: ', dataSource);
+  }, [/* dataSource */])
+
+  console.log('dataSource: ', dataSource);
 
   async function togglePlayback(playbackState) {
     if (
@@ -127,7 +139,7 @@ function Player() {
         />
       </View>
 
-      <View style={[styles.buttonArea, { marginBottom: 90 }]}>
+      <View style={styles.buttonArea}>
         {/* skip prev a song */}
         <TouchableOpacity
           onPress={async () => {
@@ -169,14 +181,14 @@ function Player() {
         </TouchableOpacity>
       </View>
 
-      {/* <View style={[styles.buttonArea, { marginBottom: 90 }]}> */}
+      <View style={[styles.buttonArea, { marginBottom: 90 }]}>
         {/* <TouchableOpacity>
           <Repeat32 />
         </TouchableOpacity>
         <TouchableOpacity>
           <Shuffle32 />
         </TouchableOpacity> */}
-      {/* </View> */}
+      </View>
     </SafeAreaView>
   )
 }
@@ -232,4 +244,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Player
+export default PlayerTemp

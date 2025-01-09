@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 
-import { callArtistAt } from '../ApiArtist';
+import { callArtistAt } from '../services/ArtistService';
 
 const IMAGE_SIZE = 125
 const IMAGE_VIEW_SIZE = IMAGE_SIZE * 1.1
@@ -33,7 +33,7 @@ class SectionText extends React.Component {
 }
 
 // Create a component
-class InfoDetail extends React.Component {
+class ArtistDetailScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
 })
 
 // Make this component available to the app
-export default InfoDetail
+export default ArtistDetailScreen
