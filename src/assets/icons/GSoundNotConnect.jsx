@@ -1,8 +1,8 @@
-import * as React from "react"
-import Svg, { Defs, ClipPath, Path, G } from "react-native-svg"
+import React from 'react';
+import Svg, { Defs, ClipPath, Path, G } from 'react-native-svg';
+
 const GSoundNotConnect = (props) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
     width={96}
     height={96}
     overflow="hidden"
@@ -21,5 +21,6 @@ const GSoundNotConnect = (props) => (
       />
     </G>
   </Svg>
-)
-export default GSoundNotConnect
+);
+
+export default GSoundNotConnect;

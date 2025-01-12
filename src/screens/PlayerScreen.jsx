@@ -1,5 +1,4 @@
-// Import liraries
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
-} from 'react-native'
+} from 'react-native';
 import Slider from '@react-native-community/slider';
 import TrackPlayer, {
   Capability,
@@ -17,29 +16,25 @@ import TrackPlayer, {
   usePlaybackState,
   useProgress,
 } from 'react-native-track-player';
-
-// Import custom libraries
-import { callSongAt, callSongList } from '../services/SongService';
-import Play48 from "../assets/icons/Play48";
-import Pause48 from "../assets/icons/Pause48";
-import SkipPrev from "../assets/icons/SkipPrev32";
-import SkipNext from "../assets/icons/SkipNext32";
-import Repeat32 from '../assets/icons/Repeat32';
-import Shuffle32 from '../assets/icons/Shuffle32';
 import { useRoute } from '@react-navigation/native';
 
-const NOW_PLAYING_BASE = Dimensions.get('window').width
-const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75
-const NOW_PLAYING_BASE_IMAGE = Dimensions.get('window').width * 0.825
+import { callSongList } from '../services/SongService';
+import Play48 from '../assets/icons/Play48';
+import Pause48 from '../assets/icons/Pause48';
+import SkipPrev from '../assets/icons/SkipPrev32';
+import SkipNext from '../assets/icons/SkipNext32';
 
-// Create a component
+const NOW_PLAYING_BASE = Dimensions.get('window').width;
+const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75;
+const NOW_PLAYING_BASE_IMAGE = Dimensions.get('window').width * 0.825;
+
 function PlayerScreen() {
-  const route = useRoute()
-  const reactRef = React.useRef()
+  const route = useRoute();
+  const reactRef = React.useRef();
   const [dataSource, setDataSource] = React.useState([]);
   const [currentSong, setCurrentSong] = React.useState(route.params.index);
-  const playbackState = usePlaybackState()
-  const progress = useProgress()
+  const playbackState = usePlaybackState();
+  const progress = useProgress();
 
   // constructor(props) {
   //   super(props)
@@ -54,16 +49,16 @@ function PlayerScreen() {
 
   React.useEffect(() => {
     callSongList().then(data => {
-      setDataSource(data)
+      setDataSource(data);
       setTimeout(() => {
         reactRef.current.scrollToIndex({
           animated: true,
           index: currentSong,
-        })
-      }, 500)// minimum 13
+        });
+      }, 500);// minimum 13
       async function setupPlayer() {
         try {
-          await TrackPlayer.setupPlayer()
+          await TrackPlayer.setupPlayer();
           TrackPlayer.updateOptions({
             // Media controls capabilities
             capabilities: [
@@ -77,18 +72,18 @@ function PlayerScreen() {
             // Capabilities that will show up when the notification is in the compact form on Android
             compactCapabilities: [
               Capability.Play,
-              Capability.Pause
+              Capability.Pause,
             ],
           });
-          await TrackPlayer.add(data)
-          await TrackPlayer.skip(currentSong)
-          togglePlayback(playbackState)
+          await TrackPlayer.add(data);
+          await TrackPlayer.skip(currentSong);
+          togglePlayback(playbackState);
         }
         catch (e) { }
       }
-      setupPlayer()
-    })
-  }, [])
+      setupPlayer();
+    });
+  }, []);
 
   async function togglePlayback(playbackState) {
     if (
@@ -97,10 +92,10 @@ function PlayerScreen() {
       playbackState === State.Buffering ||
       playbackState === State.Connecting
     ) {
-      await TrackPlayer.play()
+      await TrackPlayer.play();
     }
     else {
-      await TrackPlayer.pause()
+      await TrackPlayer.pause();
     }
   }
 
@@ -113,10 +108,10 @@ function PlayerScreen() {
         pagingEnabled
         data={dataSource}
         onScroll={async (e) => {
-          const x = e.nativeEvent.contentOffset.x / NOW_PLAYING_BASE
-          setCurrentSong(parseInt(x.toFixed(0)))
-          await TrackPlayer.skip(parseInt(x.toFixed(0)))
-          togglePlayback(playbackState)
+          const x = e.nativeEvent.contentOffset.x / NOW_PLAYING_BASE;
+          setCurrentSong(parseInt(x.toFixed(0)));
+          await TrackPlayer.skip(parseInt(x.toFixed(0)));
+          togglePlayback(playbackState);
         }}
         renderItem={({ item, index }) =>
           <View>
@@ -142,9 +137,9 @@ function PlayerScreen() {
           maximumValue={progress.duration}
           minimumValue={0}
           thumbStyle={{ width: 20, height: 20 }}
-          thumbTintColor='black'
+          thumbTintColor="black"
           onValueChange={async (value) => {
-            await TrackPlayer.seekTo(value)
+            await TrackPlayer.seekTo(value);
           }}
         />
       </View>
@@ -154,13 +149,13 @@ function PlayerScreen() {
         <TouchableOpacity
           onPress={async () => {
             if (currentSong > 0) {
-              setCurrentSong(currentSong - 1)
+              setCurrentSong(currentSong - 1);
               reactRef.current.scrollToIndex({
                 animated: true,
                 index: currentSong - 1,
-              })
-              await TrackPlayer.skip(currentSong - 1)
-              togglePlayback(playbackState)
+              });
+              await TrackPlayer.skip(currentSong - 1);
+              togglePlayback(playbackState);
             }
           }}
         ><SkipPrev />
@@ -169,7 +164,7 @@ function PlayerScreen() {
         {/* play a song */}
         <TouchableOpacity
           onPress={async () => {
-            togglePlayback(playbackState)
+            togglePlayback(playbackState);
           }}
         >{playbackState === State.Paused || playbackState === State.Ready ? <Play48 /> : <Pause48 />}
         </TouchableOpacity>
@@ -178,13 +173,13 @@ function PlayerScreen() {
         <TouchableOpacity
           onPress={async () => {
             if (dataSource.length - 1 > currentSong) {
-              setCurrentSong(currentSong + 1)
+              setCurrentSong(currentSong + 1);
               reactRef.current.scrollToIndex({
                 animated: true,
                 index: currentSong + 1,
-              })
-              await TrackPlayer.skip(currentSong + 1)
-              togglePlayback(playbackState)
+              });
+              await TrackPlayer.skip(currentSong + 1);
+              togglePlayback(playbackState);
             }
           }}
         ><SkipNext />
@@ -200,7 +195,7 @@ function PlayerScreen() {
         </TouchableOpacity> */}
       </View>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -252,6 +247,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
-})
+});
 
-export default PlayerScreen
+export default PlayerScreen;

@@ -1,27 +1,21 @@
-// Import liraries
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer } from '@react-navigation/native'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 
-// Import custom components
-import SongListStack from './SongListStack'
-import ArtistStack from './ArtistStack'
+import SongListStack from './SongListStack';
+import ArtistStack from './ArtistStack';
+import AlbumList from '../assets/icons/AlbumList';
+import User from '../assets/icons/User';
 
-// Import icons
-import AlbumList from '../assets/icons/AlbumList'
-import User from '../assets/icons/User'
+const Tab = createBottomTabNavigator();
 
-const Tab = createBottomTabNavigator()
-
-// Create a component
 class RootBottomTab extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator initialRouteName='SongListStack' screenOptions={{ headerShown: false }}>
+        <Tab.Navigator initialRouteName="SongListStack" screenOptions={{ headerShown: false }}>
           <Tab.Screen
-            name='SongListStack'
+            name="SongListStack"
             component={SongListStack}
             options={{
               title: 'List',
@@ -30,7 +24,7 @@ class RootBottomTab extends React.Component {
           />
 
           <Tab.Screen
-            name='ArtistStack'
+            name="ArtistStack"
             component={ArtistStack}
             options={{
               title: 'Artist',
@@ -39,16 +33,8 @@ class RootBottomTab extends React.Component {
           />
         </Tab.Navigator>
       </NavigationContainer>
-    )
+    );
   }
 }
 
-// Define styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
-
-// Make this component available to the app
-export default RootBottomTab
+export default RootBottomTab;

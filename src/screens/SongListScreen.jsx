@@ -1,30 +1,30 @@
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
   FlatList,
-} from 'react-native'
+} from 'react-native';
 
-import SongItem from '../components/SongItem'
-import { callSongList } from '../services/SongService'
+import SongItem from '../components/SongItem';
+import { callSongList } from '../services/SongService';
 
 class SongListScreen extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       songs: [],
-    }
-    this.moveToSongDetail = this.moveToSongDetail.bind(this)
+    };
+    this.moveToSongDetail = this.moveToSongDetail.bind(this);
   }
 
   componentDidMount() {
-    callSongList().then(data => this.setState({ songs: data }))
+    callSongList().then(data => this.setState({ songs: data }));
   }
 
   moveToSongDetail(index) {
     this.props.navigation.navigate('PlayerScreen', {
       index: index,
-    })
+    });
   }
 
   render() {
@@ -41,7 +41,7 @@ class SongListScreen extends React.Component {
           // keyExtractor={item => item.Id}
         />
       </SafeAreaView>
-    )
+    );
   }
 }
 
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   flatList: {
     marginTop: 10,
   },
-})
+});
 
-export default SongListScreen
+export default SongListScreen;

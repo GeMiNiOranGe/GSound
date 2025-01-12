@@ -1,5 +1,4 @@
-// Import liraries
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,39 +7,38 @@ import {
   Image,
   Dimensions,
   ScrollView,
-} from 'react-native'
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { callArtistAt } from '../services/ArtistService';
 
-const IMAGE_SIZE = 125
-const IMAGE_VIEW_SIZE = IMAGE_SIZE * 1.1
-const BORDER_RADIUS = 7
-const MARGIN_TOP = 115
+const IMAGE_SIZE = 125;
+const IMAGE_VIEW_SIZE = IMAGE_SIZE * 1.1;
+const BORDER_RADIUS = 7;
+const MARGIN_TOP = 115;
 
-const DashBreak = () => <View style={{ height: 1, backgroundColor: 'black', marginVertical: 10, }} />
+const DashBreak = () => <View style={{ height: 1, backgroundColor: 'black', marginVertical: 10 }} />;
 
 class SectionText extends React.Component {
   render() {
     return (
       <View>
-        <Text style={[styles.text, { fontSize: 20, fontWeight: 500, }]}>{this.props.title}</Text>
+        <Text style={[styles.text, { fontSize: 20, fontWeight: 500 }]}>{this.props.title}</Text>
         <Text style={styles.text}>{this.props.infoText}</Text>
         <DashBreak />
       </View>
-    )
+    );
   }
 }
 
-// Create a component
 class ArtistDetailScreen extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
 
     const id = this.props.route.params.id;
 
-    callArtistAt(id).then(data => this.setState(data))
+    callArtistAt(id).then(data => this.setState(data));
   }
 
   componentDidMount() {
@@ -49,7 +47,6 @@ class ArtistDetailScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        {/* background image */}
         <Image
           style={styles.backgroundImage}
           blurRadius={6}
@@ -57,17 +54,15 @@ class ArtistDetailScreen extends React.Component {
         />
 
         <ScrollView style={styles.absolute}>
-          {/* gradient to cover background image */}
           <LinearGradient
             style={{
               height: Dimensions.get('window').height,
-              marginTop: MARGIN_TOP
+              marginTop: MARGIN_TOP,
             }}
             end={{ x: 0.5, y: 0.1 }}
             colors={['transparent', '#E5E5F3']}
           />
 
-          {/* main information */}
           <View style={styles.absolute}>
             <View style={styles.infoMainView}>
               <View style={styles.imageView}>
@@ -92,11 +87,10 @@ class ArtistDetailScreen extends React.Component {
           </View>
         </ScrollView>
       </SafeAreaView>
-    )
+    );
   }
 }
 
-// Define styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -147,7 +141,6 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
   },
-})
+});
 
-// Make this component available to the app
-export default ArtistDetailScreen
+export default ArtistDetailScreen;

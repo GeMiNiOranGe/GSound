@@ -1,38 +1,33 @@
-// Import liraries
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   TouchableHighlight,
   View,
   Text,
   Image,
-} from 'react-native'
+} from 'react-native';
 
-// Import custom components
-import Play24 from "../assets/icons/Play24";
+import Play24 from '../assets/icons/Play24';
 
-const IMAGE_SIZE = 64
-const SPACE_BETWEEN_COMPONENTS = 8
+const IMAGE_SIZE = 64;
+const SPACE_BETWEEN_COMPONENTS = 8;
 
-// Create a component
 class SongItem/* ({ song, index, onPress }) */ extends React.Component {
   render() {
     return (
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          this.props.onPress(this.props.index)
+          this.props.onPress(this.props.index);
         }}
         underlayColor={'pink'}
       >
         <View style={styles.songView}>
-          {/* song image */}
           <Image
             style={styles.image}
             source={{ uri: this.props.song.imageSongUri }}
           />
 
-          {/* song infomation */}
           <View style={styles.info}>
             <Text
               style={styles.songName}
@@ -47,17 +42,15 @@ class SongItem/* ({ song, index, onPress }) */ extends React.Component {
             </Text>
           </View>
 
-          {/* play this song */}
           <View style={styles.playIcon}>
             <Play24 />
           </View>
         </View>
       </TouchableHighlight>
-    )
+    );
   }
 }
 
-// Define styles
 const styles = StyleSheet.create({
   button: {
     marginBottom: 10,
@@ -95,7 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});
 
-// Make this component available to the app
-export default SongItem
+export default SongItem;

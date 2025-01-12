@@ -1,8 +1,8 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import React from 'react';
+import Svg, { Path } from 'react-native-svg';
+
 const Shuffle32 = (props) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
     width={32}
     height={32}
     fill="none"
@@ -30,5 +30,6 @@ const Shuffle32 = (props) => (
       d="m20 20 2-2-2-2"
     />
   </Svg>
-)
-export default Shuffle32
+);
+
+export default Shuffle32;

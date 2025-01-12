@@ -1,8 +1,8 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import React from 'react';
+import Svg, { Path } from 'react-native-svg';
+
 const Repeat32 = (props) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
     width={32}
     height={32}
     fill="none"
@@ -24,5 +24,6 @@ const Repeat32 = (props) => (
       d="M14.5 14.5 17 17l-2.5 2.5"
     />
   </Svg>
-)
-export default Repeat32
+);
+
+export default Repeat32;

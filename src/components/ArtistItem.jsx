@@ -1,26 +1,25 @@
-// Import liraries
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
   TouchableHighlight,
   Image,
-} from 'react-native'
-import Arrow from '../assets/icons/Arrow'
+} from 'react-native';
 
-const IMAGE_SIZE = 96
-const SPACE_BETWEEN_COMPONENTS = 8
-const BORDER_RADIUS = 7
+import Arrow from '../assets/icons/Arrow';
 
-// Create a component
+const IMAGE_SIZE = 96;
+const SPACE_BETWEEN_COMPONENTS = 8;
+const BORDER_RADIUS = 7;
+
 class ArtistItem extends React.Component {
   render() {
     return (
       <TouchableHighlight
         style={styles.button}
         onPress={() => {
-          this.props.onPress(this.props.artist)
+          this.props.onPress(this.props.artist);
         }}
         underlayColor={'pink'}
       >
@@ -41,11 +40,10 @@ class ArtistItem extends React.Component {
           <View style={styles.nextIcon}><Arrow /></View>
         </View>
       </TouchableHighlight>
-    )
+    );
   }
 }
 
-// Define styles
 const styles = StyleSheet.create({
   button: {
     marginBottom: 10,
@@ -78,7 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});
 
-// Make this component available to the app
-export default ArtistItem
+export default ArtistItem;

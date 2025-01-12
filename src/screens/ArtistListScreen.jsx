@@ -1,33 +1,29 @@
-// Import liraries
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
-  View,
-  Text,
   FlatList,
-} from 'react-native'
-import { callArtistList } from '../services/ArtistService'
-import ArtistItem from '../components/ArtistItem'
+} from 'react-native';
+import { callArtistList } from '../services/ArtistService';
+import ArtistItem from '../components/ArtistItem';
 
-// Create a component
 class ArtistListScreen extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       artists: [],
-    }
-    this.moveToInfoDetail = this.moveToInfoDetail.bind(this)
+    };
+    this.moveToInfoDetail = this.moveToInfoDetail.bind(this);
   }
 
   componentDidMount() {
-    callArtistList().then(data => this.setState({ artists: data }))
+    callArtistList().then(data => this.setState({ artists: data }));
   }
 
   moveToInfoDetail(data) {
     this.props.navigation.navigate('ArtistDetailScreen', {
       id: data.id,
-    })
+    });
   }
 
   render() {
@@ -40,14 +36,13 @@ class ArtistListScreen extends React.Component {
             artist={item}
             onPress={this.moveToInfoDetail}
           />}
-        // keyExtractor={item => item.Id}
+          // keyExtractor={item => item.Id}
         />
       </SafeAreaView>
-    )
+    );
   }
 }
 
-// Define styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,7 +51,6 @@ const styles = StyleSheet.create({
   flatList: {
     marginTop: 10,
   },
-})
+});
 
-// Make this component available to the app
-export default ArtistListScreen
+export default ArtistListScreen;
