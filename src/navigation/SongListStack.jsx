@@ -6,23 +6,26 @@ import PlayerScreen from '../screens/PlayerScreen';
 
 const Stack = createNativeStackNavigator();
 
-class SongListStack extends React.Component {
-  render() {
-    return (
-      <Stack.Navigator initialRouteName="SongListScreen">
-        <Stack.Screen
-          name="SongListScreen"
-          component={SongListScreen}
-          options={{ title: 'List' }}
-        />
+function SongListStack() {
+  return (
+    <Stack.Navigator initialRouteName="SongListScreen">
+      <Stack.Screen
+        name="SongListScreen"
+        component={SongListScreen}
+        options={{
+          title: 'List',
+        }}
+      />
 
-        <Stack.Screen
-          name="PlayerScreen"
-          component={PlayerScreen}
-        />
-      </Stack.Navigator>
-    );
-  }
+      <Stack.Screen
+        name="PlayerScreen"
+        component={PlayerScreen}
+        options={{
+          title: 'Player',
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
 
 export default SongListStack;

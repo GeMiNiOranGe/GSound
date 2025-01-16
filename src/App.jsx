@@ -1,9 +1,13 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+
 import RootBottomTab from './navigation/RootBottomTab';
 
 function App() {
   return (
-    <RootBottomTab />
+    <NavigationContainer>
+      <RootBottomTab />
+    </NavigationContainer>
   );
 }
 
