@@ -11,25 +11,12 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 import { callArtistAt } from '../services/ArtistService';
+import Section from '../components/Section';
 
 const IMAGE_SIZE = 125;
 const IMAGE_VIEW_SIZE = IMAGE_SIZE * 1.1;
 const BORDER_RADIUS = 7;
 const MARGIN_TOP = 115;
-
-const DashBreak = () => <View style={{ height: 1, backgroundColor: 'black', marginVertical: 10 }} />;
-
-class SectionText extends React.Component {
-  render() {
-    return (
-      <View>
-        <Text style={[styles.text, { fontSize: 20, fontWeight: 500 }]}>{this.props.title}</Text>
-        <Text style={styles.text}>{this.props.infoText}</Text>
-        <DashBreak />
-      </View>
-    );
-  }
-}
 
 class ArtistDetailScreen extends React.Component {
   constructor(props) {
@@ -41,8 +28,7 @@ class ArtistDetailScreen extends React.Component {
     callArtistAt(id).then(data => this.setState(data));
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -77,13 +63,21 @@ class ArtistDetailScreen extends React.Component {
               </View>
             </View>
 
-            <View style={styles.infoDetailView}>
-              <Text style={styles.text}>Years Active: {this.state.yearsActive}</Text>
-              <DashBreak />
-              <SectionText title={'Genres'} infoText={this.state.genres} />
-              <SectionText title={'Labels'} infoText={this.state.labels} />
-              <SectionText title={'History'} infoText={this.state.history} />
-            </View>
+            <Section style={styles.detailSection}>
+              <Section.Label
+                name="Years Active"
+                value={this.state.yearsActive}
+              />
+              <Section.Divider />
+
+              <Section.Label name="Genres" value={this.state.genres} />
+              <Section.Divider />
+
+              <Section.Label name="Labels" value={this.state.labels} />
+              <Section.Divider />
+
+              <Section.Label name="History" value={this.state.history} />
+            </Section>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -101,9 +95,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginTop: MARGIN_TOP,
   },
-  infoDetailView: {
-    marginTop: 10,
-    marginHorizontal: 10,
+  detailSection: {
+    marginTop: 16,
   },
   backgroundImage: {
     height: '70%',
