@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-} from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { callArtistList } from '../services/ArtistService';
-import ArtistItem from '../components/ArtistItem';
+import ArtistCard from '../components/ArtistCard';
 
 class ArtistListScreen extends React.Component {
   constructor(props) {
@@ -13,30 +11,36 @@ class ArtistListScreen extends React.Component {
     this.state = {
       artists: [],
     };
-    this.moveToInfoDetail = this.moveToInfoDetail.bind(this);
+    this.renderArtistItem = this.renderArtistItem.bind(this);
   }
 
   componentDidMount() {
     callArtistList().then(data => this.setState({ artists: data }));
   }
 
-  moveToInfoDetail(data) {
-    this.props.navigation.navigate('ArtistDetailScreen', {
-      id: data.id,
-    });
+  renderArtistItem({ item, index }) {
+    return (
+      <ArtistCard
+        item={item}
+        index={index}
+        listLength={this.state.artists.length}
+        onPress={() =>
+          this.props.navigation.navigate('ArtistDetailScreen', {
+            id: item.id,
+          })
+        }
+      />
+    );
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
-          style={styles.flatList}
+          contentContainerStyle={styles.contentList}
+          keyExtractor={item => item.id.toString()}
           data={this.state.artists}
-          renderItem={({ item, index }) => <ArtistItem
-            artist={item}
-            onPress={this.moveToInfoDetail}
-          />}
-          // keyExtractor={item => item.Id}
+          renderItem={this.renderArtistItem}
         />
       </SafeAreaView>
     );
@@ -48,8 +52,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5F3',
   },
-  flatList: {
-    marginTop: 10,
+  contentList: {
+    paddingVertical: 8,
   },
 });
 
