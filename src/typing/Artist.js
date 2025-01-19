@@ -6,5 +6,5 @@
  * @property {string} genres
  * @property {string} yearsActive
  * @property {string} labels
- * @property {number} id
+ * @property {string} id
  */

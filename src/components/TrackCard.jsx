@@ -1,43 +1,46 @@
 import React from 'react';
 import {
   StyleSheet,
+  TouchableHighlight,
   View,
   Text,
-  TouchableHighlight,
-  TouchableOpacity,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
-import Arrow from '../assets/icons/Arrow';
+import Play24 from '../assets/icons/Play24';
 
 const CARD_PADDING = 8;
 const CARD_BORDER_RADIUS = 16;
-const AVATAR_SIZE = 80;
-const AVATAR_BORDER_RADIUS = CARD_BORDER_RADIUS - CARD_PADDING;
+const IMAGE_SIZE = 64;
 
 /**
- * @param {CardBaseProps<Artist>} props
+ * @param {CardBaseProps<Track>} props
  */
-function ArtistCard({ item, index, listLength, onPress }) {
+function TrackCard({ item, index, listLength, onPress }) {
   const marginBottom = index === (listLength || 0) - 1 ? 0 : 8;
 
   return (
     <TouchableHighlight
       style={[styles.card, { marginBottom }]}
       onPress={onPress}
-      underlayColor="lightgray"
+      underlayColor={'lightgray'}
     >
       <>
-        <Image style={styles.avatar} source={{ uri: item.avatar }} />
+        <Image style={styles.image} source={{ uri: item.imageSongUri }} />
 
         <View style={styles.info}>
-          <Text style={styles.name} numberOfLines={2}>
-            {item.name}
+          <Text style={styles.name} numberOfLines={1}>
+            {item.title}
+          </Text>
+
+          <Text style={styles.artist} numberOfLines={1}>
+            {item.artist}
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.navigate} onPress={onPress}>
-          <Arrow />
+        <TouchableOpacity style={styles.navigate}>
+          <Play24 />
         </TouchableOpacity>
       </>
     </TouchableHighlight>
@@ -53,10 +56,10 @@ const styles = StyleSheet.create({
     elevation: 5,
     backgroundColor: 'white',
   },
-  avatar: {
-    height: AVATAR_SIZE,
-    width: AVATAR_SIZE,
-    borderRadius: AVATAR_BORDER_RADIUS,
+  image: {
+    height: IMAGE_SIZE,
+    width: IMAGE_SIZE,
+    borderRadius: 1000,
   },
   info: {
     flex: 1,
@@ -65,13 +68,19 @@ const styles = StyleSheet.create({
     marginRight: CARD_PADDING,
   },
   name: {
-    fontSize: 20,
+    fontSize: 16,
     color: 'black',
+    marginBottom: 4,
+  },
+  artist: {
+    fontSize: 14,
+    color: 'gray',
   },
   navigate: {
+    marginHorizontal: CARD_PADDING,
     justifyContent: 'center',
     alignItems: 'center',
   },
 });
 
-export default ArtistCard;
+export default TrackCard;

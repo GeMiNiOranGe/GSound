@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 
-import SongItem from '../components/SongItem';
+import TrackCard from '../components/TrackCard';
 import { callSongList } from '../services/SongService';
 
 class SongListScreen extends React.Component {
@@ -14,31 +10,36 @@ class SongListScreen extends React.Component {
     this.state = {
       songs: [],
     };
-    this.moveToSongDetail = this.moveToSongDetail.bind(this);
+    this.renderTrackItem = this.renderTrackItem.bind(this);
   }
 
   componentDidMount() {
     callSongList().then(data => this.setState({ songs: data }));
   }
 
-  moveToSongDetail(index) {
-    this.props.navigation.navigate('PlayerScreen', {
-      index: index,
-    });
+  renderTrackItem({ item, index }) {
+    return (
+      <TrackCard
+        item={item}
+        index={index}
+        listLength={this.state.songs.length}
+        onPress={() =>
+          this.props.navigation.navigate('PlayerScreen', {
+            index,
+          })
+        }
+      />
+    );
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
-          style={styles.flatList}
+          contentContainerStyle={styles.contentList}
+          keyExtractor={item => item.id}
           data={this.state.songs}
-          renderItem={({ item, index }) => <SongItem
-            song={item}
-            index={index}
-            onPress={this.moveToSongDetail}
-          />}
-          // keyExtractor={item => item.Id}
+          renderItem={this.renderTrackItem}
         />
       </SafeAreaView>
     );
@@ -50,8 +51,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5F3',
   },
-  flatList: {
-    marginTop: 10,
+  contentList: {
+    paddingVertical: 8,
   },
 });
 

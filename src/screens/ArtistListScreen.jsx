@@ -38,7 +38,7 @@ class ArtistListScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <FlatList
           contentContainerStyle={styles.contentList}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item.id}
           data={this.state.artists}
           renderItem={this.renderArtistItem}
         />
