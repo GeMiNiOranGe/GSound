@@ -1,6 +1,9 @@
 import { MOCKAPI_URL } from '../config';
 
-export async function callArtistList() {
+/**
+ * @returns {Promise<Artist[]>}
+ */
+export async function getArtistList() {
   let url = `${MOCKAPI_URL}/Artists`;
   const response = await fetch(url);
   const json = await response.json();

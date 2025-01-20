@@ -1,50 +1,65 @@
 import React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { callArtistList } from '../services/ArtistService';
+import { getArtistList } from '../services/ArtistService';
 import ArtistCard from '../components/ArtistCard';
 
-class ArtistListScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      artists: [],
-    };
-    this.renderArtistItem = this.renderArtistItem.bind(this);
-  }
+/**
+ * @param {RootScreenProps<'ArtistListScreen'>} props
+ */
+function ArtistListScreen({ navigation }) {
+  /**
+   * @type {[Artist[], React.Dispatch<React.SetStateAction<Artist[]>>]}
+   */
+  const [artists, setArtists] = React.useState([]);
 
-  componentDidMount() {
-    callArtistList().then(data => this.setState({ artists: data }));
-  }
+  React.useEffect(() => {
+    fetchArtists();
+  }, [fetchArtists]);
 
-  renderArtistItem({ item, index }) {
-    return (
+  const fetchArtists = React.useCallback(async () => {
+    const results = await getArtistList();
+    setArtists(results);
+  }, []);
+
+  /**
+   * @type {import('react-native').ListRenderItem<Artist>}
+   */
+  const renderArtistItem = React.useCallback(
+    ({ item, index }) => (
       <ArtistCard
         item={item}
         index={index}
-        listLength={this.state.artists.length}
+        listLength={artists.length}
         onPress={() =>
-          this.props.navigation.navigate('ArtistDetailScreen', {
+          navigation.navigate('ArtistDetailScreen', {
             id: item.id,
           })
         }
       />
-    );
-  }
+    ),
+    [artists.length, navigation],
+  );
 
-  render() {
+  if (!artists) {
     return (
       <SafeAreaView style={styles.container}>
-        <FlatList
-          contentContainerStyle={styles.contentList}
-          keyExtractor={item => item.id}
-          data={this.state.artists}
-          renderItem={this.renderArtistItem}
-        />
+        <ActivityIndicator size="large" />
       </SafeAreaView>
     );
   }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        contentContainerStyle={styles.contentList}
+        keyExtractor={item => item.id}
+        data={artists}
+        renderItem={renderArtistItem}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
