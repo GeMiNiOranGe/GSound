@@ -12,13 +12,13 @@ function ArtistListScreen({ navigation }) {
   /**
    * @type {[Artist[], React.Dispatch<React.SetStateAction<Artist[]>>]}
    */
-  const [artists, setArtists] = React.useState([]);
+  const [artistList, setArtists] = React.useState([]);
 
   React.useEffect(() => {
-    fetchArtists();
-  }, [fetchArtists]);
+    fetchArtistList();
+  }, [fetchArtistList]);
 
-  const fetchArtists = React.useCallback(async () => {
+  const fetchArtistList = React.useCallback(async () => {
     const results = await getArtistList();
     setArtists(results);
   }, []);
@@ -31,7 +31,7 @@ function ArtistListScreen({ navigation }) {
       <ArtistCard
         item={item}
         index={index}
-        listLength={artists.length}
+        listLength={artistList.length}
         onPress={() =>
           navigation.navigate('ArtistDetailScreen', {
             id: item.id,
@@ -39,10 +39,10 @@ function ArtistListScreen({ navigation }) {
         }
       />
     ),
-    [artists.length, navigation],
+    [artistList.length, navigation],
   );
 
-  if (!artists) {
+  if (!artistList.length) {
     return (
       <SafeAreaView style={styles.container}>
         <ActivityIndicator size="large" />
@@ -55,7 +55,7 @@ function ArtistListScreen({ navigation }) {
       <FlatList
         contentContainerStyle={styles.contentList}
         keyExtractor={item => item.id}
-        data={artists}
+        data={artistList}
         renderItem={renderArtistItem}
       />
     </SafeAreaView>

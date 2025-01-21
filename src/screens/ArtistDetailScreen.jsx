@@ -5,84 +5,93 @@ import {
   View,
   Text,
   Image,
-  Dimensions,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { callArtistAt } from '../services/ArtistService';
+import { getArtist } from '../services/ArtistService';
 import Section from '../components/Section';
 
-const IMAGE_SIZE = 125;
-const IMAGE_VIEW_SIZE = IMAGE_SIZE * 1.1;
-const BORDER_RADIUS = 7;
-const MARGIN_TOP = 115;
+const AVATAR_BOX_BORDER_RADIUS = 8;
+const AVATAR_BOX_PADDING = 8;
+const AVATAR_SIZE = 120;
+const AVATAR_BORDER_RADIUS = AVATAR_BOX_BORDER_RADIUS - AVATAR_BOX_PADDING;
+const HEADER_MARGIN_TOP = 120;
 
-class ArtistDetailScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+/**
+ * @param {RootScreenProps<'ArtistDetailScreen'>} props
+ */
+function ArtistDetailScreen({ navigation, route }) {
+  /**
+   * @type {[Artist, React.Dispatch<React.SetStateAction<Artist>>]}
+   */
+  const [artist, setArtist] = React.useState(undefined);
 
-    const id = this.props.route.params.id;
+  React.useEffect(() => {
+    fetchArtist();
+  }, [fetchArtist]);
 
-    callArtistAt(id).then(data => this.setState(data));
-  }
+  const fetchArtist = React.useCallback(async () => {
+    const id = route.params.id;
+    const result = await getArtist(id);
 
-  componentDidMount() {}
+    navigation.setOptions({ title: result.name });
+    setArtist(result);
+  }, [navigation, route.params.id]);
 
-  render() {
+  if (!artist) {
     return (
       <SafeAreaView style={styles.container}>
-        <Image
-          style={styles.backgroundImage}
-          blurRadius={6}
-          source={{ uri: this.state.avatar }}
-        />
-
-        <ScrollView style={styles.absolute}>
-          <LinearGradient
-            style={{
-              height: Dimensions.get('window').height,
-              marginTop: MARGIN_TOP,
-            }}
-            end={{ x: 0.5, y: 0.1 }}
-            colors={['transparent', '#E5E5F3']}
-          />
-
-          <View style={styles.absolute}>
-            <View style={styles.infoMainView}>
-              <View style={styles.imageView}>
-                <Image
-                  style={styles.image}
-                  source={{ uri: this.state.avatar }}
-                />
-              </View>
-
-              <View style={styles.nameView}>
-                <Text style={styles.name}>{this.state.name}</Text>
-              </View>
-            </View>
-
-            <Section style={styles.detailSection}>
-              <Section.Label
-                name="Years Active"
-                value={this.state.yearsActive}
-              />
-              <Section.Divider />
-
-              <Section.Label name="Genres" value={this.state.genres} />
-              <Section.Divider />
-
-              <Section.Label name="Labels" value={this.state.labels} />
-              <Section.Divider />
-
-              <Section.Label name="History" value={this.state.history} />
-            </Section>
-          </View>
-        </ScrollView>
+        <ActivityIndicator size="large" />
       </SafeAreaView>
     );
   }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Image
+        style={styles.background}
+        blurRadius={6}
+        source={{ uri: artist.avatar }}
+      />
+
+      <ScrollView style={StyleSheet.absoluteFill}>
+        <View style={{ height: HEADER_MARGIN_TOP }} />
+
+        <LinearGradient
+          style={styles.header}
+          end={{ x: 0.5, y: 0.5 }}
+          colors={['transparent', '#E5E5F3']}
+        >
+          <View style={styles.avatarBox}>
+            <Image style={styles.avatar} source={{ uri: artist.avatar }} />
+          </View>
+
+          <View style={styles.nameBox}>
+            <Text style={styles.name} numberOfLines={2}>
+              {artist.name}
+            </Text>
+          </View>
+        </LinearGradient>
+
+        <View style={styles.content}>
+          <Section>
+            <Section.Label name="Years Active" value={artist.yearsActive} />
+            <Section.Divider />
+
+            <Section.Label name="Genres" value={artist.genres} />
+            <Section.Divider />
+
+            <Section.Label name="Labels" value={artist.labels} />
+            <Section.Divider />
+
+            <Section.Label name="History" value={artist.history} />
+          </Section>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -90,49 +99,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5F3',
   },
-  infoMainView: {
+  background: {
+    height: '50%',
+  },
+  header: {
     flexDirection: 'row',
-    marginHorizontal: 10,
-    marginTop: MARGIN_TOP,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
-  detailSection: {
-    marginTop: 16,
-  },
-  backgroundImage: {
-    height: '70%',
-  },
-  imageView: {
-    height: IMAGE_VIEW_SIZE,
-    width: IMAGE_VIEW_SIZE,
+  avatarBox: {
     backgroundColor: 'white',
-    borderRadius: BORDER_RADIUS,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 20,
+    borderRadius: AVATAR_BOX_BORDER_RADIUS,
+    elevation: 5,
+    padding: AVATAR_BOX_PADDING,
   },
-  image: {
-    height: IMAGE_SIZE,
-    width: IMAGE_SIZE,
-    borderRadius: BORDER_RADIUS,
+  avatar: {
+    height: AVATAR_SIZE,
+    width: AVATAR_SIZE,
+    borderRadius: AVATAR_BORDER_RADIUS,
   },
-  nameView: {
+  nameBox: {
+    flex: 1,
     justifyContent: 'flex-end',
     marginLeft: 10,
-    height: IMAGE_VIEW_SIZE,
   },
   name: {
     color: 'black',
-    fontSize: 32,
+    fontSize: 28,
   },
-  text: {
-    color: 'black',
-  },
-  absolute: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
+  content: {
+    backgroundColor: '#E5E5F3',
+    paddingVertical: 8,
   },
 });
 
