@@ -6,12 +6,12 @@ import {
   Text,
   Image,
   ScrollView,
-  ActivityIndicator,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { getArtist } from '../services/ArtistService';
 import Section from '../components/Section';
+import FullScreenLoader from '../components/FullScreenLoader';
 
 const AVATAR_BOX_BORDER_RADIUS = 8;
 const AVATAR_BOX_PADDING = 8;
@@ -41,11 +41,7 @@ function ArtistDetailScreen({ navigation, route }) {
   }, [navigation, route.params.id]);
 
   if (!artist) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" />
-      </SafeAreaView>
-    );
+    return <FullScreenLoader />;
   }
 
   return (

@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getArtistList } from '../services/ArtistService';
 import ArtistCard from '../components/ArtistCard';
+import FullScreenLoader from '../components/FullScreenLoader';
 
 /**
  * @param {RootScreenProps<'ArtistListScreen'>} props
@@ -43,11 +44,7 @@ function ArtistListScreen({ navigation }) {
   );
 
   if (!artistList.length) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" />
-      </SafeAreaView>
-    );
+    return <FullScreenLoader />;
   }
 
   return (
