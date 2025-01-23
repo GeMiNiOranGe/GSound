@@ -1,17 +1,17 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import SongListScreen from '../screens/SongListScreen';
+import TrackListScreen from '../screens/TrackListScreen';
 import PlayerScreen from '../screens/PlayerScreen';
 
 const Stack = createNativeStackNavigator();
 
-function SongListStack() {
+function TrackStack() {
   return (
-    <Stack.Navigator initialRouteName="SongListScreen">
+    <Stack.Navigator initialRouteName="TrackListScreen">
       <Stack.Screen
-        name="SongListScreen"
-        component={SongListScreen}
+        name="TrackListScreen"
+        component={TrackListScreen}
         options={{
           title: 'List',
         }}
@@ -28,4 +28,4 @@ function SongListStack() {
   );
 }
 
-export default SongListStack;
+export default TrackStack;

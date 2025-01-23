@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import SongListStack from './SongListStack';
+import TrackStack from './TrackStack';
 import ArtistStack from './ArtistStack';
 import AlbumList from '../assets/icons/AlbumList';
 import User from '../assets/icons/User';
@@ -14,14 +14,14 @@ function RootBottomTab() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="SongListStack"
+      initialRouteName="TrackStack"
       screenOptions={{
         headerShown: false,
       }}
     >
       <BottomTab.Screen
-        name="SongListStack"
-        component={SongListStack}
+        name="TrackStack"
+        component={TrackStack}
         options={{
           title: 'Track',
           tabBarIcon: renderTrackIcon,

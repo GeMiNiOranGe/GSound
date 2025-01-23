@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import TrackCard from '../components/TrackCard';
 import { callSongList } from '../services/SongService';
 
-class SongListScreen extends React.Component {
+class TrackListScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SongListScreen;
+export default TrackListScreen;
