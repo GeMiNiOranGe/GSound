@@ -4,6 +4,7 @@
  *     id: number;
  *   };
  *   ArtistListScreen: undefined;
+ *   TrackListScreen: undefined;
  * }} RootStackParamList
  */
 

@@ -13,7 +13,7 @@ function ArtistListScreen({ navigation }) {
   /**
    * @type {[Artist[], React.Dispatch<React.SetStateAction<Artist[]>>]}
    */
-  const [artistList, setArtists] = React.useState([]);
+  const [artistList, setArtistList] = React.useState([]);
 
   React.useEffect(() => {
     fetchArtistList();
@@ -21,7 +21,7 @@ function ArtistListScreen({ navigation }) {
 
   const fetchArtistList = React.useCallback(async () => {
     const results = await getArtistList();
-    setArtists(results);
+    setArtistList(results);
   }, []);
 
   /**

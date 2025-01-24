@@ -1,49 +1,62 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { getTrackList } from '../services/SongService';
 import TrackCard from '../components/TrackCard';
-import { callSongList } from '../services/SongService';
+import FullScreenLoader from '../components/FullScreenLoader';
 
-class TrackListScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      songs: [],
-    };
-    this.renderTrackItem = this.renderTrackItem.bind(this);
-  }
+/**
+ * @param {RootScreenProps<'TrackListScreen'>} props
+ */
+function TrackListScreen({ navigation }) {
+  /**
+   * @type {[Track[], React.Dispatch<React.SetStateAction<Track[]>>]}
+   */
+  const [trackList, setTrackList] = React.useState([]);
 
-  componentDidMount() {
-    callSongList().then(data => this.setState({ songs: data }));
-  }
+  React.useEffect(() => {
+    fetchTrackList();
+  }, [fetchTrackList]);
 
-  renderTrackItem({ item, index }) {
-    return (
+  const fetchTrackList = React.useCallback(async () => {
+    const results = await getTrackList();
+    setTrackList(results);
+  }, []);
+
+  /**
+   * @type {import('react-native').ListRenderItem<Track>}
+   */
+  const renderTrackItem = React.useCallback(
+    ({ item, index }) => (
       <TrackCard
         item={item}
         index={index}
-        listLength={this.state.songs.length}
+        listLength={trackList.length}
         onPress={() =>
-          this.props.navigation.navigate('PlayerScreen', {
+          navigation.navigate('PlayerScreen', {
             index,
           })
         }
       />
-    );
+    ),
+    [navigation, trackList.length],
+  );
+
+  if (!trackList.length) {
+    return <FullScreenLoader />;
   }
 
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          contentContainerStyle={styles.contentList}
-          keyExtractor={item => item.id}
-          data={this.state.songs}
-          renderItem={this.renderTrackItem}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        contentContainerStyle={styles.contentList}
+        keyExtractor={item => item.id}
+        data={trackList}
+        renderItem={renderTrackItem}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
