@@ -18,7 +18,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { useRoute } from '@react-navigation/native';
 
-import { getTrackList } from '../services/SongService';
+import { getTrackList } from '../services/TrackService';
 import Play48 from '../assets/icons/Play48';
 import Pause48 from '../assets/icons/Pause48';
 import SkipPrev from '../assets/icons/SkipPrev32';

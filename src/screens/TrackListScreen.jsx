@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { getTrackList } from '../services/SongService';
+import { getTrackList } from '../services/TrackService';
 import TrackCard from '../components/TrackCard';
 import FullScreenLoader from '../components/FullScreenLoader';
 
