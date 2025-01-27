@@ -1,9 +1,12 @@
 /**
  * @typedef {import('@react-navigation/native').ParamListBase & {
  *   ArtistDetailScreen: {
- *     id: number;
+ *     id: string;
  *   };
  *   ArtistListScreen: undefined;
+ *   PlayerScreen: {
+ *     index: number;
+ *   };
  *   TrackListScreen: undefined;
  * }} RootStackParamList
  */

@@ -9,10 +9,3 @@ export async function getTrackList() {
   const json = await response.json();
   return json;
 }
-
-export async function callSongAt(id) {
-  let url = `${MOCKAPI_URL}/tracks/${id}`;
-  const response = await fetch(url);
-  const json = await response.json();
-  return json;
-}

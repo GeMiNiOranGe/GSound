@@ -23,9 +23,7 @@ const HEADER_MARGIN_TOP = 120;
  * @param {RootScreenProps<'ArtistDetailScreen'>} props
  */
 function ArtistDetailScreen({ navigation, route }) {
-  /**
-   * @type {[Artist, React.Dispatch<React.SetStateAction<Artist>>]}
-   */
+  /** @type {State<Artist>} */
   const [artist, setArtist] = React.useState(undefined);
 
   React.useEffect(() => {

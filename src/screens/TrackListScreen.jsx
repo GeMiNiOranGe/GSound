@@ -10,9 +10,7 @@ import FullScreenLoader from '../components/FullScreenLoader';
  * @param {RootScreenProps<'TrackListScreen'>} props
  */
 function TrackListScreen({ navigation }) {
-  /**
-   * @type {[Track[], React.Dispatch<React.SetStateAction<Track[]>>]}
-   */
+  /** @type {State<Track[]>} */
   const [trackList, setTrackList] = React.useState([]);
 
   React.useEffect(() => {

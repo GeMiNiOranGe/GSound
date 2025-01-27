@@ -10,9 +10,7 @@ import FullScreenLoader from '../components/FullScreenLoader';
  * @param {RootScreenProps<'ArtistListScreen'>} props
  */
 function ArtistListScreen({ navigation }) {
-  /**
-   * @type {[Artist[], React.Dispatch<React.SetStateAction<Artist[]>>]}
-   */
+  /** @type {State<Artist[]>} */
   const [artistList, setArtistList] = React.useState([]);
 
   React.useEffect(() => {
