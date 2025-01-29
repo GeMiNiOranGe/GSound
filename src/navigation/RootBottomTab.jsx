@@ -1,16 +1,24 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AlbumList, User } from 'iconoir-react-native';
 
 import TrackStack from './TrackStack';
 import ArtistStack from './ArtistStack';
-import AlbumList from '../assets/icons/AlbumList';
-import User from '../assets/icons/User';
 
 const BottomTab = createBottomTabNavigator();
 
 function RootBottomTab() {
-  const renderTrackIcon = React.useCallback(() => <AlbumList />, []);
-  const renderArtistIcon = React.useCallback(() => <User />, []);
+  /** @type {TabBarIcon} */
+  const renderTrackIcon = React.useCallback(
+    ({ color, size }) => <AlbumList color={color} width={size} height={size} />,
+    [],
+  );
+
+  /** @type {TabBarIcon} */
+  const renderArtistIcon = React.useCallback(
+    ({ color, size }) => <User color={color} width={size} height={size} />,
+    [],
+  );
 
   return (
     <BottomTab.Navigator
