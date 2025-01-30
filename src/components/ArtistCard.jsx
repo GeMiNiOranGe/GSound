@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-
-import Arrow from '../assets/icons/Arrow';
+import { NavArrowRight } from 'iconoir-react-native';
 
 const CARD_PADDING = 8;
 const CARD_BORDER_RADIUS = 16;
@@ -37,7 +36,7 @@ function ArtistCard({ item, index, listLength, onPress }) {
         </View>
 
         <TouchableOpacity style={styles.navigate} onPress={onPress}>
-          <Arrow />
+          <NavArrowRight color="black" width={24} height={24} />
         </TouchableOpacity>
       </>
     </TouchableHighlight>

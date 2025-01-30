@@ -7,8 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-
-import Play24 from '../assets/icons/Play24';
+import { Play } from 'iconoir-react-native';
 
 const CARD_PADDING = 8;
 const CARD_BORDER_RADIUS = 16;
@@ -39,8 +38,8 @@ function TrackCard({ item, index, listLength, onPress }) {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.navigate}>
-          <Play24 />
+        <TouchableOpacity style={styles.navigate} onPress={onPress}>
+          <Play color="black" width={24} height={24} />
         </TouchableOpacity>
       </>
     </TouchableHighlight>
