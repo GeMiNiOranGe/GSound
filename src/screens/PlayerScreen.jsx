@@ -16,12 +16,9 @@ import TrackPlayer, {
   usePlaybackState,
   useProgress,
 } from 'react-native-track-player';
+import { Pause, Play, SkipNext, SkipPrev } from 'iconoir-react-native';
 
 import { getTrackList } from '../services/TrackService';
-import Play48 from '../assets/icons/Play48';
-import Pause48 from '../assets/icons/Pause48';
-import SkipPrev from '../assets/icons/SkipPrev32';
-import SkipNext from '../assets/icons/SkipNext32';
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width;
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75;
@@ -174,19 +171,19 @@ function PlayerScreen({ route }) {
 
       <View style={styles.buttonArea}>
         <TouchableOpacity onPress={onPreviousTrackPress}>
-          <SkipPrev />
+          <SkipPrev color="black" width={32} height={32} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={togglePlayback}>
           {[State.Paused, State.Ready].includes(playbackState) ? (
-            <Play48 />
+            <Play color="black" width={48} height={48} />
           ) : (
-            <Pause48 />
+            <Pause color="black" width={48} height={48} />
           )}
         </TouchableOpacity>
 
         <TouchableOpacity onPress={onNextTrackPress}>
-          <SkipNext />
+          <SkipNext color="black" width={32} height={32} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
