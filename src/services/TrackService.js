@@ -1,8 +1,6 @@
 import { MOCKAPI_URL } from '../config';
 
-/**
- * @returns {Promise<Track[]>}
- */
+/** @returns {Promise<Track[]>} */
 export async function getTrackList() {
   let url = `${MOCKAPI_URL}/tracks`;
   const response = await fetch(url);

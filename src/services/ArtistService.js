@@ -1,8 +1,6 @@
 import { MOCKAPI_URL } from '../config';
 
-/**
- * @returns {Promise<Artist[]>}
- */
+/** @returns {Promise<Artist[]>} */
 export async function getArtistList() {
   let url = `${MOCKAPI_URL}/artists`;
   const response = await fetch(url);
@@ -12,6 +10,7 @@ export async function getArtistList() {
 
 /**
  * Get a single one artist by id
+ *
  * @param {string} id Artist id.
  * @returns {Promise<Artist>}
  */

@@ -13,9 +13,7 @@ const CARD_PADDING = 8;
 const CARD_BORDER_RADIUS = 16;
 const IMAGE_SIZE = 64;
 
-/**
- * @param {CardBaseProps<Track>} props
- */
+/** @param {CardBaseProps<Track>} props */
 function TrackCard({ item, index, listLength, onPress }) {
   const marginBottom = index === (listLength || 0) - 1 ? 0 : 8;
 

@@ -19,9 +19,7 @@ const AVATAR_SIZE = 120;
 const AVATAR_BORDER_RADIUS = AVATAR_BOX_BORDER_RADIUS - AVATAR_BOX_PADDING;
 const HEADER_MARGIN_TOP = 120;
 
-/**
- * @param {RootScreenProps<'ArtistDetailScreen'>} props
- */
+/** @param {RootScreenProps<'ArtistDetailScreen'>} props */
 function ArtistDetailScreen({ navigation, route }) {
   /** @type {State<Artist>} */
   const [artist, setArtist] = React.useState(undefined);

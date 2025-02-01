@@ -14,9 +14,7 @@ const CARD_BORDER_RADIUS = 16;
 const AVATAR_SIZE = 80;
 const AVATAR_BORDER_RADIUS = CARD_BORDER_RADIUS - CARD_PADDING;
 
-/**
- * @param {CardBaseProps<Artist>} props
- */
+/** @param {CardBaseProps<Artist>} props */
 function ArtistCard({ item, index, listLength, onPress }) {
   const marginBottom = index === (listLength || 0) - 1 ? 0 : 8;
 

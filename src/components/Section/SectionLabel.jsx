@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 /**
  * @param {{
- *    style?: StyleProp<ViewStyle>;
- *    name: string;
- *    value: string;
+ *   style?: StyleProp<ViewStyle>;
+ *   name: string;
+ *   value: string;
  * }} param0
  */
 function SectionLabel({ style, name, value }) {

@@ -6,9 +6,7 @@ import { getArtistList } from '../services/ArtistService';
 import ArtistCard from '../components/ArtistCard';
 import FullScreenLoader from '../components/FullScreenLoader';
 
-/**
- * @param {RootScreenProps<'ArtistListScreen'>} props
- */
+/** @param {RootScreenProps<'ArtistListScreen'>} props */
 function ArtistListScreen({ navigation }) {
   /** @type {State<Artist[]>} */
   const [artistList, setArtistList] = React.useState([]);
@@ -22,9 +20,7 @@ function ArtistListScreen({ navigation }) {
     setArtistList(results);
   }, []);
 
-  /**
-   * @type {import('react-native').ListRenderItem<Artist>}
-   */
+  /** @type {import('react-native').ListRenderItem<Artist>} */
   const renderArtistItem = React.useCallback(
     ({ item, index }) => (
       <ArtistCard

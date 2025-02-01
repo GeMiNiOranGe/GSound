@@ -23,9 +23,7 @@ import { getTrackList } from '../services/TrackService';
 const NOW_PLAYING_BASE = Dimensions.get('window').width;
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75;
 
-/**
- * @param {RootScreenProps<'PlayerScreen'>} props
- */
+/** @param {RootScreenProps<'PlayerScreen'>} props */
 function PlayerScreen({ route }) {
   /** @type {State<Track[]>} */
   const [trackList, setTrackList] = React.useState([]);
@@ -87,7 +85,13 @@ function PlayerScreen({ route }) {
       : await TrackPlayer.pause();
   }, [playbackState]);
 
-  /** @type {(event: import('react-native').NativeSyntheticEvent<import('react-native').NativeScrollEvent>) => void} */
+  /**
+   * @type {(
+   *   event: import('react-native').NativeSyntheticEvent<
+   *     import('react-native').NativeScrollEvent
+   *   >,
+   * ) => void}
+   */
   const onScroll = React.useCallback(
     async e => {
       const x = e.nativeEvent.contentOffset.x / NOW_PLAYING_BASE;

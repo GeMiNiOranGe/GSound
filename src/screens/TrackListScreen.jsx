@@ -6,9 +6,7 @@ import { getTrackList } from '../services/TrackService';
 import TrackCard from '../components/TrackCard';
 import FullScreenLoader from '../components/FullScreenLoader';
 
-/**
- * @param {RootScreenProps<'TrackListScreen'>} props
- */
+/** @param {RootScreenProps<'TrackListScreen'>} props */
 function TrackListScreen({ navigation }) {
   /** @type {State<Track[]>} */
   const [trackList, setTrackList] = React.useState([]);
@@ -22,9 +20,7 @@ function TrackListScreen({ navigation }) {
     setTrackList(results);
   }, []);
 
-  /**
-   * @type {import('react-native').ListRenderItem<Track>}
-   */
+  /** @type {import('react-native').ListRenderItem<Track>} */
   const renderTrackItem = React.useCallback(
     ({ item, index }) => (
       <TrackCard

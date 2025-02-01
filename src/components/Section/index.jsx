@@ -6,8 +6,8 @@ import SectionDivider from './SectionDivider';
 
 /**
  * @param {{
- *    style?: StyleProp<ViewStyle>;
- *    children?: React.ReactNode;
+ *   style?: StyleProp<ViewStyle>;
+ *   children?: React.ReactNode;
  * }} param0
  */
 function Section({ style, children }) {
