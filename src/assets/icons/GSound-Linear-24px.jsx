@@ -15,4 +15,4 @@ function GSound({ size = 24, color = 'black', ...props }) {
   );
 }
 
-export default GSound;
+export default React.memo(GSound);

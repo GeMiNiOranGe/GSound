@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArtistCard;
+export default React.memo(ArtistCard);

@@ -14,4 +14,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SectionDivider;
+export default React.memo(SectionDivider);

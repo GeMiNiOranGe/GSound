@@ -246,4 +246,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PlayerScreen;
+export default React.memo(PlayerScreen);

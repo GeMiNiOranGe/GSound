@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FullScreenLoader;
+export default React.memo(FullScreenLoader);

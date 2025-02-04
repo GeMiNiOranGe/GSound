@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SectionLabel;
+export default React.memo(SectionLabel);

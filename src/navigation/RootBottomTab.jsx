@@ -48,4 +48,4 @@ function RootBottomTab() {
   );
 }
 
-export default RootBottomTab;
+export default React.memo(RootBottomTab);

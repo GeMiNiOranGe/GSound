@@ -28,4 +28,4 @@ function TrackStack() {
   );
 }
 
-export default TrackStack;
+export default React.memo(TrackStack);

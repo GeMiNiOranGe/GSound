@@ -28,4 +28,4 @@ function ArtistStack() {
   );
 }
 
-export default ArtistStack;
+export default React.memo(ArtistStack);

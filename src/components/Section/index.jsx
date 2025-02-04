@@ -14,7 +14,7 @@ function Section({ style, children }) {
   return <View style={style}>{children}</View>;
 }
 
-Section.Label = SectionLabel;
-Section.Divider = SectionDivider;
-
-export default Section;
+export default Object.assign(React.memo(Section), {
+  Label: SectionLabel,
+  Divider: SectionDivider,
+});

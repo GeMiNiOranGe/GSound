@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArtistListScreen;
+export default React.memo(ArtistListScreen);
