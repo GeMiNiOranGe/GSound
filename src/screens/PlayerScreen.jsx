@@ -107,9 +107,12 @@ function PlayerScreen({ route }) {
   /** @type {import('react-native').ListRenderItem<Track>} */
   const renderTrackItem = React.useCallback(
     ({ item }) => (
-      <View style={styles.base}>
-        <View style={styles.imageBox}>
-          <Image style={styles.image} source={{ uri: item.imageSongUri }} />
+      <View style={styles.track}>
+        <View style={styles.trackImageBox}>
+          <Image
+            style={styles.trackImage}
+            source={{ uri: item.imageSongUri }}
+          />
         </View>
 
         <View style={styles.trackNameBox}>
@@ -154,15 +157,17 @@ function PlayerScreen({ route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        horizontal
-        ref={trackListRef}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        onScroll={onScroll}
-        data={trackList}
-        renderItem={renderTrackItem}
-      />
+      <View>
+        <FlatList
+          horizontal
+          ref={trackListRef}
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          onScroll={onScroll}
+          data={trackList}
+          renderItem={renderTrackItem}
+        />
+      </View>
 
       <Slider
         style={styles.sliderBox}
@@ -199,12 +204,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5F3',
   },
-  base: {
+  track: {
     width: NOW_PLAYING_BASE,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
   },
-  imageBox: {
+  trackImageBox: {
     marginTop: 32,
     marginBottom: 16,
     padding: 16,
@@ -212,13 +217,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 10,
   },
-  image: {
+  trackImage: {
     width: NOW_PLAYING_IMAGE,
     height: NOW_PLAYING_IMAGE,
     borderRadius: 1000,
   },
   trackNameBox: {
-    marginBottom: 32,
+    marginBottom: 16,
     alignItems: 'center',
     paddingHorizontal: 16,
   },
@@ -236,10 +241,9 @@ const styles = StyleSheet.create({
   sliderBox: {
     alignSelf: 'center',
     width: '90%',
-    marginBottom: 8,
+    marginBottom: 16,
   },
   buttonArea: {
-    marginBottom: 48,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
