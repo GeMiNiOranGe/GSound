@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-function GSound({ size = 24, color = 'black', ...props }) {
+function GSound({ size = 24, color = 'transparent', ...props }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" {...props}>
       <Path
