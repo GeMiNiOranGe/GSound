@@ -9,12 +9,16 @@ import GSound from '../assets/logos/GSound';
 
 /** @param {RootScreenProps<'TrackListScreen'>} props */
 function TrackListScreen({ navigation }) {
-  /** @type {State<Track[]>} */
-  const [trackList, setTrackList] = React.useState([]);
+  const [trackList, setTrackList] = React.useState(/** @type {Track[]} */ ([]));
 
-  React.useEffect(() => {
-    fetchTrackList();
-  }, [fetchTrackList]);
+  const renderHeaderLeft = React.useCallback(
+    () => (
+      <View style={styles.headerLeftBox}>
+        <GSound color="black" />
+      </View>
+    ),
+    [],
+  );
 
   const fetchTrackList = React.useCallback(async () => {
     navigation.setOptions({
@@ -25,14 +29,9 @@ function TrackListScreen({ navigation }) {
     setTrackList(results);
   }, [navigation, renderHeaderLeft]);
 
-  const renderHeaderLeft = React.useCallback(
-    () => (
-      <View style={styles.headerLeftBox}>
-        <GSound color="black" />
-      </View>
-    ),
-    [],
-  );
+  React.useEffect(() => {
+    fetchTrackList();
+  }, [fetchTrackList]);
 
   /** @type {import('react-native').ListRenderItem<Track>} */
   const renderTrackItem = React.useCallback(

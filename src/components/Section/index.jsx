@@ -6,7 +6,7 @@ import SectionDivider from './SectionDivider';
 
 /**
  * @param {{
- *   style?: StyleProp<ViewStyle>;
+ *   style?: import('react-native').StyleProp<import('react-native').ViewStyle>;
  *   children?: React.ReactNode;
  * }} param0
  */

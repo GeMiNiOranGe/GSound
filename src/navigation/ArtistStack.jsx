@@ -4,6 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ArtistListScreen from '../screens/ArtistListScreen';
 import ArtistDetailScreen from '../screens/ArtistDetailScreen';
 
+/**
+ * @type {ReturnType<
+ *   typeof createNativeStackNavigator<RootStackParamList>
+ * >}
+ */
 const Stack = createNativeStackNavigator();
 
 function ArtistStack() {

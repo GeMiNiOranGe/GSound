@@ -21,12 +21,9 @@ const HEADER_MARGIN_TOP = 120;
 
 /** @param {RootScreenProps<'ArtistDetailScreen'>} props */
 function ArtistDetailScreen({ navigation, route }) {
-  /** @type {State<Artist>} */
-  const [artist, setArtist] = React.useState(undefined);
-
-  React.useEffect(() => {
-    fetchArtist();
-  }, [fetchArtist]);
+  const [artist, setArtist] = React.useState(
+    /** @type {Artist | undefined} */ (undefined),
+  );
 
   const fetchArtist = React.useCallback(async () => {
     const id = route.params.id;
@@ -35,6 +32,10 @@ function ArtistDetailScreen({ navigation, route }) {
     navigation.setOptions({ title: result.name });
     setArtist(result);
   }, [navigation, route.params.id]);
+
+  React.useEffect(() => {
+    fetchArtist();
+  }, [fetchArtist]);
 
   if (!artist) {
     return <FullScreenLoader />;

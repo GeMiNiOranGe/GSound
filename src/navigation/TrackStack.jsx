@@ -4,6 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TrackListScreen from '../screens/TrackListScreen';
 import PlayerScreen from '../screens/PlayerScreen';
 
+/**
+ * @type {ReturnType<
+ *   typeof createNativeStackNavigator<RootStackParamList>
+ * >}
+ */
 const Stack = createNativeStackNavigator();
 
 function TrackStack() {

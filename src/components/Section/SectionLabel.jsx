@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 /**
  * @param {{
- *   style?: StyleProp<ViewStyle>;
+ *   style?: import('react-native').StyleProp<import('react-native').ViewStyle>;
  *   name: string;
  *   value: string;
  * }} param0

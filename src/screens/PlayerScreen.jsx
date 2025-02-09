@@ -25,12 +25,11 @@ const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75;
 
 /** @param {RootScreenProps<'PlayerScreen'>} props */
 function PlayerScreen({ route }) {
-  /** @type {State<Track[]>} */
-  const [trackList, setTrackList] = React.useState([]);
+  const [trackList, setTrackList] = React.useState(/** @type {Track[]} */ ([]));
   const [currentIndex, setCurrentIndex] = React.useState(route.params.index);
 
-  /** @type {React.MutableRefObject<FlatList>} */
-  const trackListRef = React.useRef();
+  /** @type {React.RefObject<FlatList<Track>>} */
+  const trackListRef = React.useRef(null);
   const playbackState = usePlaybackState();
   const progress = useProgress();
 
@@ -42,7 +41,7 @@ function PlayerScreen({ route }) {
     const results = await getTrackList();
     setTrackList(results);
     setTimeout(() => {
-      trackListRef.current.scrollToIndex({
+      trackListRef.current?.scrollToIndex({
         animated: true,
         index: currentIndex,
       });
@@ -132,7 +131,7 @@ function PlayerScreen({ route }) {
   const onPreviousTrackPress = React.useCallback(async () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      trackListRef.current.scrollToIndex({
+      trackListRef.current?.scrollToIndex({
         animated: true,
         index: currentIndex - 1,
       });
@@ -145,7 +144,7 @@ function PlayerScreen({ route }) {
   const onNextTrackPress = React.useCallback(async () => {
     if (trackList.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
-      trackListRef.current.scrollToIndex({
+      trackListRef.current?.scrollToIndex({
         animated: true,
         index: currentIndex + 1,
       });

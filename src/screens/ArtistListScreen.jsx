@@ -9,12 +9,18 @@ import GSound from '../assets/logos/GSound';
 
 /** @param {RootScreenProps<'ArtistListScreen'>} props */
 function ArtistListScreen({ navigation }) {
-  /** @type {State<Artist[]>} */
-  const [artistList, setArtistList] = React.useState([]);
+  const [artistList, setArtistList] = React.useState(
+    /** @type {Artist[]} */ ([]),
+  );
 
-  React.useEffect(() => {
-    fetchArtistList();
-  }, [fetchArtistList]);
+  const renderHeaderLeft = React.useCallback(
+    () => (
+      <View style={styles.headerLeftBox}>
+        <GSound color="black" />
+      </View>
+    ),
+    [],
+  );
 
   const fetchArtistList = React.useCallback(async () => {
     navigation.setOptions({
@@ -25,14 +31,9 @@ function ArtistListScreen({ navigation }) {
     setArtistList(results);
   }, [navigation, renderHeaderLeft]);
 
-  const renderHeaderLeft = React.useCallback(
-    () => (
-      <View style={styles.headerLeftBox}>
-        <GSound color="black" />
-      </View>
-    ),
-    [],
-  );
+  React.useEffect(() => {
+    fetchArtistList();
+  }, [fetchArtistList]);
 
   /** @type {import('react-native').ListRenderItem<Artist>} */
   const renderArtistItem = React.useCallback(
