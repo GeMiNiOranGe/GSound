@@ -5,5 +5,6 @@ module.exports = {
     curly: 'error',
     camelcase: ['error'],
     eqeqeq: ['error', 'smart'],
+    'no-console': 'error',
   },
 };
