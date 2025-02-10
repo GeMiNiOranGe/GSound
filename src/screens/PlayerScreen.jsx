@@ -11,7 +11,6 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Slider from '@react-native-community/slider';
 import TrackPlayer, {
-  Capability,
   State,
   usePlaybackState,
   useProgress,
@@ -19,6 +18,7 @@ import TrackPlayer, {
 import { Pause, Play, SkipNext, SkipPrev } from 'iconoir-react-native';
 
 import { getTrackList } from '../services/TrackService';
+import FullScreenLoader from '../components/FullScreenLoader';
 
 const NOW_PLAYING_BASE = Dimensions.get('window').width;
 const NOW_PLAYING_IMAGE = Dimensions.get('window').width * 0.75;
@@ -33,56 +33,38 @@ function PlayerScreen({ route }) {
   const playbackState = usePlaybackState();
   const progress = useProgress();
 
-  React.useEffect(() => {
-    fetchTrackList();
-  }, [fetchTrackList]);
-
   const fetchTrackList = React.useCallback(async () => {
     const results = await getTrackList();
     setTrackList(results);
+
     setTimeout(() => {
       trackListRef.current?.scrollToIndex({
         animated: true,
         index: currentIndex,
       });
     }, 500); // minimum 13
-    await setupPlayer(results);
-  }, [currentIndex, setupPlayer]);
 
-  /** @type {(tracks: Track[]) => Promise<void>} */
-  const setupPlayer = React.useCallback(
-    async tracks => {
-      try {
-        await TrackPlayer.setupPlayer();
-        await TrackPlayer.add(tracks);
-        await TrackPlayer.skip(currentIndex);
-        await TrackPlayer.updateOptions({
-          // Media controls capabilities
-          capabilities: [
-            Capability.Play,
-            Capability.Pause,
-            Capability.SkipToNext,
-            Capability.SkipToPrevious,
-            Capability.Stop,
-          ],
+    await TrackPlayer.reset();
+    await TrackPlayer.add(results);
+    await TrackPlayer.skip(currentIndex);
+    await TrackPlayer.play();
+  }, [currentIndex]);
 
-          // Capabilities that will show up when the notification is in the compact form on Android
-          compactCapabilities: [Capability.Play, Capability.Pause],
-        });
-
-        await togglePlayback();
-      } catch (e) {}
-    },
-    [currentIndex, togglePlayback],
-  );
+  React.useEffect(() => {
+    fetchTrackList();
+  }, [fetchTrackList]);
 
   const togglePlayback = React.useCallback(async () => {
-    [State.Paused, State.Ready, State.Buffering, State.Connecting].includes(
-      playbackState,
+    if (!playbackState.state) {
+      return;
+    }
+
+    [State.Paused, State.Ready, State.Buffering, State.Loading].includes(
+      playbackState.state,
     )
       ? await TrackPlayer.play()
       : await TrackPlayer.pause();
-  }, [playbackState]);
+  }, [playbackState.state]);
 
   /**
    * @type {(
@@ -91,7 +73,7 @@ function PlayerScreen({ route }) {
    *   >,
    * ) => void}
    */
-  const onScroll = React.useCallback(
+  const onMomentumScrollEnd = React.useCallback(
     async e => {
       const x = e.nativeEvent.contentOffset.x / NOW_PLAYING_BASE;
       const xIndex = parseInt(x.toFixed(0), 10);
@@ -136,6 +118,7 @@ function PlayerScreen({ route }) {
         index: currentIndex - 1,
       });
 
+      // FIXME: remove 2 lines code below
       await TrackPlayer.skip(currentIndex - 1);
       await togglePlayback();
     }
@@ -149,10 +132,15 @@ function PlayerScreen({ route }) {
         index: currentIndex + 1,
       });
 
+      // FIXME: remove 2 lines code below
       await TrackPlayer.skip(currentIndex + 1);
       await togglePlayback();
     }
   }, [currentIndex, togglePlayback, trackList.length]);
+
+  if (!trackList.length) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -162,7 +150,7 @@ function PlayerScreen({ route }) {
           ref={trackListRef}
           showsHorizontalScrollIndicator={false}
           pagingEnabled
-          onScroll={onScroll}
+          onMomentumScrollEnd={onMomentumScrollEnd}
           data={trackList}
           renderItem={renderTrackItem}
         />
@@ -183,7 +171,8 @@ function PlayerScreen({ route }) {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={togglePlayback}>
-          {[State.Paused, State.Ready].includes(playbackState) ? (
+          {playbackState.state &&
+          [State.Paused, State.Ready].includes(playbackState.state) ? (
             <Play color="black" width={48} height={48} />
           ) : (
             <Pause color="black" width={48} height={48} />
