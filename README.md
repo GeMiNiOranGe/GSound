@@ -1,9 +1,21 @@
 <h1 align="center">
-    <picture>
-        <source media="(min-width: 425px)" srcset="./demo/header/header.svg">
-        <img src="./demo/header/header-mobile.svg" width="auto" alt="test">
-    </picture>
+  <picture>
+    <source media="(min-width: 425px)" srcset="./demo/header/header.svg">
+    <img src="./demo/header/header-mobile.svg" width="auto" alt="test">
+  </picture>
 </h1>
+
+<p align="center">
+  <a href="https://code.visualstudio.com/">
+    <img alt="Editor" src="https://img.shields.io/badge/Editor-VSCode-007acc?style=flat-square">
+  </a>
+  <a href="https://jsdoc.app/">
+    <img alt="Data type" src="https://img.shields.io/badge/Data_type-JSDoc-808080?style=flat-square">
+  </a>
+  <a href="">
+    <img alt="Programming language" src="https://img.shields.io/badge/JavaScript-000?style=flat-square&logo=javascript">
+  </a>
+</p>
 
 GSound is a music player for mobile devices.
 
